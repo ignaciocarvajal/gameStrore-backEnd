@@ -1,0 +1,5 @@
+#SQL Server, cambiar por parámetros reales
+sqlserver.datasource.url: sqlserver://localhost;databaseName=gamestore
+sqlserver.datasource.username: root
+sqlserver.datasource.password: root
+sqlserver.datasource.driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
