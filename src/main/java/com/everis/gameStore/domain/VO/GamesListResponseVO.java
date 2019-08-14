@@ -1,5 +1,7 @@
 package com.everis.gameStore.domain.VO;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,15 +9,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The Class ExampleVO.
+ * The Class GamesListResponseVO.
  */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ExampleVO {
+public class GamesListResponseVO {
 
-	/** The hola. */
-	private String hola;
+	/** The list games response VO. */
+	private List<GamesResponseVO> listGamesResponseVO;
 }
