@@ -1,4 +1,6 @@
-package com.everis.gameStore.domain.DTO;
+package com.everis.gameStore.domain.VO;
+
+import java.math.BigInteger;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,15 +9,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The Class ExampleDTO.
+ * The Class GamesModifyRequestDTO.
  */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ExampleDTO {
-	
-	/** The hola. */
-	private String hola;
+public class GamesModifyRequestDTO {
+
+	/** The id games. */
+	private BigInteger idGames;
 }

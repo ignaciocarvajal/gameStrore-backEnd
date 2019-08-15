@@ -9,13 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GameStoreApplication {
 
-	/**
-	 * The main method.
-	 *
-	 * @param args
-	 *            the arguments
-	 */
-	public static void main(String[] args) {
-		SpringApplication.run(GameStoreApplication.class, args);
-	}
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(GameStoreApplication.class, args);
+    }
 }
