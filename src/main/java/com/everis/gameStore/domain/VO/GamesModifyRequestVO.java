@@ -1,6 +1,7 @@
 package com.everis.gameStore.domain.VO;
 
 import java.math.BigInteger;
+import java.sql.Blob;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,8 +17,20 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GamesModifyRequestDTO {
+public class GamesModifyRequestVO {
 
-	/** The id games. */
-	private BigInteger idGames;
+    /** The id games. */
+    private BigInteger idGames;
+
+    /** The game name. */
+    private String gameName;
+
+    /** The img. */
+    private Blob img;
+
+    /** The value. */
+    private Integer value;
+
+    /** The stock. */
+    private Integer stock;
 }

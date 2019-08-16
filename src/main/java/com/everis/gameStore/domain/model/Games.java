@@ -53,7 +53,7 @@ public class Games implements Serializable {
 	@Column(name = "stock")
 	private Integer stock;
 
-	/** The id client. */
+	/** The id clients. */
 	@Column(name = "id_clients")
-	private BigInteger idClient;
+	private BigInteger idClients;
 }

@@ -22,38 +22,42 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "client")
+@Table(name = "clients")
 public class Clients implements Serializable {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/** The id. */
-	@Id
-	@Column(name = "id")
-	private BigInteger id;
+    /** The id. */
+    @Id
+    @Column(name = "id")
+    private BigInteger id;
 
-	/** The nickname. */
-	@Column(name = "nickname")
-	private String nickname;
+    /** The nickname. */
+    @Column(name = "nickname")
+    private String nickname;
 
-	/** The email. */
-	@Column(name = "email")
-	private String email;
+    /** The email. */
+    @Column(name = "email")
+    private String email;
 
-	/** The password. */
-	@Column(name = "password")
-	private String password;
+    /** The password. */
+    @Column(name = "password")
+    private String pwd;
 
-	/** The token. */
-	@Column(name = "token")
-	private String token;
+    /** The token. */
+    @Column(name = "token")
+    private String token;
 
-	/** The list acquired game. */
-	@Column(name = "list_acq_game")
-	private String listAcquiredGame;
+    /** The list acquired game. */
+    @Column(name = "list_acq_games")
+    private String listAcqGame;
 
-	/** The date acquired game. */
-	@Column(name = "date_acq_game")
-	private Timestamp dateAcquiredGame;
+    /** The date acquired game. */
+    @Column(name = "date_acq_games")
+    private Timestamp dateAcqGame;
+
+    /** The client roles. */
+    @Column(name = "client_rol")
+    private String roles;
 }

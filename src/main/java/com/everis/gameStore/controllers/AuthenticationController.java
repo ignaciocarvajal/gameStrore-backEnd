@@ -1,6 +1,11 @@
 package com.everis.gameStore.controllers;
 
 import org.hibernate.service.spi.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.gameStore.domain.DTO.AuthenticationRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
+import com.everis.gameStore.facade.AuthenticationFacade;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,6 +24,13 @@ import io.swagger.annotations.ApiResponses;
  */
 @RestController
 public class AuthenticationController {
+
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationController.class);
+
+    /** The authentication facade. */
+    @Autowired
+    AuthenticationFacade authenticationFacade;
 
     /**
      * Login user.
@@ -32,9 +45,15 @@ public class AuthenticationController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/lol", method = RequestMethod.POST, produces = "application/json")
-    public ClientsResponseDTO loginUser(@RequestBody AuthenticationRequestDTO authenticationRequestDTO)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<ClientsResponseDTO> loginUser(@RequestBody AuthenticationRequestDTO authenticationRequestDTO)
             throws ServiceException {
-        return null;
+        try {
+            return new ResponseEntity<ClientsResponseDTO>(authenticationFacade.login(authenticationRequestDTO),
+                    HttpStatus.OK);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

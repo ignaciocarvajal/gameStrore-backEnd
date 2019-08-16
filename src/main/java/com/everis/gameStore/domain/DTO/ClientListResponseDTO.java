@@ -9,15 +9,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The Class ClientsListResponseDTO.
+ * The Class ClientListResponseDTO.
  */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ClientsListResponseDTO {
+public class ClientListResponseDTO {
 
-	/** The list client response DTO. */
-	private List<ClientsResponseDTO> listClientResponseDTO;
+    /** The list clients response DTO. */
+    private List<ClientsResponseDTO> listClientsResponseDTO;
 }

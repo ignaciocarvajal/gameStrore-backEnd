@@ -26,7 +26,7 @@ public class JwtUtil {
     static void addAuthentication(HttpServletResponse res, String username) {
         String token = Jwts.builder()
                 .setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + 300000))
+                .setExpiration(new Date(System.currentTimeMillis() + 180000)) // 1 minuto => 60.000 milisec
                 .signWith(SignatureAlgorithm.HS512, "P@tit0")
                 .compact();
         res.addHeader("Authorization", "Bearer " + token);

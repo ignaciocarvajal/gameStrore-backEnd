@@ -52,7 +52,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
+                        user.getNickName(),
                         user.getPassword(),
                         Collections.emptyList()));
     }
@@ -66,11 +66,8 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
      * org.springframework.security.core.Authentication)
      */
     @Override
-    protected void successfulAuthentication(
-            HttpServletRequest req,
-            HttpServletResponse res, FilterChain chain,
+    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
-
         JwtUtil.addAuthentication(res, auth.getName());
     }
 }

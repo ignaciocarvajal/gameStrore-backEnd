@@ -4,9 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 /**
- * The Interface ExampleMapper.
+ * The Interface ClientMapper.
  */
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
-public interface ExampleMapper {
+public interface ClientMapper {
 
 }

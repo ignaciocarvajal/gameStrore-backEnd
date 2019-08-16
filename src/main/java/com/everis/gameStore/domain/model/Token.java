@@ -22,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "token")
+@Table(name = "tokens")
 public class Token implements Serializable {
 
 	/** The Constant serialVersionUID. */
