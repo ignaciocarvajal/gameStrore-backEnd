@@ -1,4 +1,4 @@
-package com.everis.gameStore.domain.DTO;
+package com.everis.gameStore.domain.VO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,17 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The Class AuthenticationRequestDTO.
+ * The Class AuthenticationRequestVO.
  */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthenticationRequestDTO {
-
-    // private String username;
-    // private String password;
+public class AuthenticationRequestVO {
 
     /** The nick name. */
     private String nickName;

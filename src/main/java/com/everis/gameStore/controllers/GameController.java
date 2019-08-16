@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.gameStore.domain.DTO.GamesListResponseDTO;
+import com.everis.gameStore.domain.DTO.GamesModifyRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesResponseDTO;
 import com.everis.gameStore.facade.GameFacade;
@@ -122,10 +122,10 @@ public class GameController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @RequestMapping(value = "/updateGame", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<Void> updateGame(@RequestBody String idGames)
+    public ResponseEntity<Void> updateGame(@RequestBody GamesModifyRequestDTO gamesModifyRequestDTO)
             throws ServiceException {
         try {
-            gameFacade.updateGame(idGames);
+            gameFacade.updateGame(gamesModifyRequestDTO);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -156,11 +156,5 @@ public class GameController {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    // PRUEBA => BORRAR DESPUES
-    @GetMapping(path = "/hola")
-    public String getUsers() {
-        return "Hola";
     }
 }

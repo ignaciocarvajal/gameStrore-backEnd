@@ -3,7 +3,8 @@ package com.everis.gameStore.facade;
 import java.math.BigInteger;
 import java.util.List;
 
-import com.everis.gameStore.domain.DTO.ClientsListResponseDTO;
+import com.everis.gameStore.domain.DTO.ClientListResponseDTO;
+import com.everis.gameStore.domain.DTO.ClientsModifyRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
 
@@ -12,40 +13,39 @@ import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
  */
 public interface ClientFacade {
 
-	/**
-	 * Creates the client.
-	 *
-	 * @param clientsRequestDTO the clients request DTO
-	 */
-	void createClient(ClientsRequestDTO clientsRequestDTO);
+    /**
+     * Creates the client.
+     *
+     * @param clientsRequestDTO the clients request DTO
+     */
+    void createClient(ClientsRequestDTO clientsRequestDTO);
 
-	/**
-	 * Gets the all clients.
-	 *
-	 * @return the all clients
-	 */
-	ClientsListResponseDTO getAllClients();
+    /**
+     * Gets the all clients.
+     *
+     * @return the all clients
+     */
+    ClientListResponseDTO getAllClients();
 
-	/**
-	 * Gets the client by id.
-	 *
-	 * @param idClient the id client
-	 * @return the client by id
-	 */
-	List<ClientsResponseDTO> getClientById(BigInteger idClient);
+    /**
+     * Gets the client by id.
+     *
+     * @param idClient the id client
+     * @return the client by id
+     */
+    List<ClientsResponseDTO> getClientById(BigInteger idClient);
 
-	/**
-	 * Update client.
-	 *
-	 * @param idClient the id client
-	 */
-	void updateClient(BigInteger idClient);
+    /**
+     * Update client.
+     *
+     * @param clientsModifyRequestDTO the clients modify request DTO
+     */
+    void updateClient(ClientsModifyRequestDTO clientsModifyRequestDTO);
 
-	/**
-	 * Delete client.
-	 *
-	 * @param idClient
-	 *            the id client
-	 */
-	void deleteClient(BigInteger idClient);
+    /**
+     * Delete client.
+     *
+     * @param idClient the id client
+     */
+    void deleteClient(BigInteger idClient);
 }
