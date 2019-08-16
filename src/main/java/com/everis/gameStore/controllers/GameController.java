@@ -157,10 +157,4 @@ public class GameController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    // PRUEBA => BORRAR DESPUES
-    @GetMapping(path = "/hola")
-    public String getUsers() {
-        return "Hola";
-    }
 }
