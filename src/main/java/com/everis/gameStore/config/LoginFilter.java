@@ -16,7 +16,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.everis.gameStore.domain.DTO.AuthenticationRequestDTO;
+import com.everis.gameStore.domain.model.Clients;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -47,13 +47,12 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
             throws AuthenticationException, IOException, ServletException {
         InputStream body = req.getInputStream();
 
-        AuthenticationRequestDTO user =
-                new ObjectMapper().readValue(body, AuthenticationRequestDTO.class);
+        Clients client = new ObjectMapper().readValue(body, Clients.class);
 
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        user.getNickName(),
-                        user.getPassword(),
+                        client.getNickname(),
+                        client.getPassword(),
                         Collections.emptyList()));
     }
 
@@ -71,3 +70,5 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
         JwtUtil.addAuthentication(res, auth.getName());
     }
 }
+
+
