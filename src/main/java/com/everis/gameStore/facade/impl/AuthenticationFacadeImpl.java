@@ -1,6 +1,7 @@
 package com.everis.gameStore.facade.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.everis.gameStore.domain.DTO.AuthenticationRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
@@ -10,11 +11,12 @@ import com.everis.gameStore.service.AuthenticationService;
 /**
  * The Class AuthenticationFacadeImpl.
  */
+@Component
 public class AuthenticationFacadeImpl implements AuthenticationFacade {
 
     /** The authentication service. */
     @Autowired
-    AuthenticationService authenticationService;
+    AuthenticationService authenticationServiceImpl;
 
     /*
      * (non-Javadoc)
@@ -24,7 +26,7 @@ public class AuthenticationFacadeImpl implements AuthenticationFacade {
      */
     @Override
     public ClientsResponseDTO login(AuthenticationRequestDTO authenticationRequestDTO) {
-        authenticationService.login(null);
+        authenticationServiceImpl.login(null);
         return null;
     }
 }

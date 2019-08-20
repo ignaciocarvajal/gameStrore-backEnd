@@ -1,7 +1,6 @@
 package com.everis.gameStore.domain.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -31,7 +30,7 @@ public class Clients implements Serializable {
     /** The id. */
     @Id
     @Column(name = "id")
-    private BigInteger id;
+    private Long idClient;
 
     /** The nickname. */
     @Column(name = "nickname")
@@ -43,7 +42,7 @@ public class Clients implements Serializable {
 
     /** The password. */
     @Column(name = "password")
-    private String pwd;
+    private String password;
 
     /** The token. */
     @Column(name = "token")
@@ -51,13 +50,13 @@ public class Clients implements Serializable {
 
     /** The list acquired game. */
     @Column(name = "list_acq_games")
-    private String listAcqGame;
+    private String listAcquiredGame;
 
     /** The date acquired game. */
     @Column(name = "date_acq_games")
-    private Timestamp dateAcqGame;
+    private Timestamp dateAcquiredGame;
 
     /** The client roles. */
     @Column(name = "client_rol")
-    private String roles;
+    private String clientRoles;
 }

@@ -1,7 +1,6 @@
 package com.everis.gameStore.domain.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,13 +29,13 @@ public class Sessions implements Serializable {
 	/** The id. */
 	@Id
 	@Column(name = "id")
-	private BigInteger id;
+	private Long id;
 
 	/** The id client. */
 	@Column(name = "id_client")
-	private BigInteger idClient;
+	private Long idClient;
 
 	/** The id token. */
 	@Column(name = "id_token")
-	private BigInteger idToken;
+	private Long idToken;
 }

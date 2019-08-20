@@ -1,10 +1,7 @@
 package com.everis.gameStore.facade;
 
-import java.math.BigInteger;
 import java.util.List;
 
-import com.everis.gameStore.domain.DTO.ClientListResponseDTO;
-import com.everis.gameStore.domain.DTO.ClientsModifyRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
 
@@ -25,7 +22,7 @@ public interface ClientFacade {
      *
      * @return the all clients
      */
-    ClientListResponseDTO getAllClients();
+    List<ClientsResponseDTO> getAllClients();
 
     /**
      * Gets the client by id.
@@ -33,19 +30,19 @@ public interface ClientFacade {
      * @param idClient the id client
      * @return the client by id
      */
-    List<ClientsResponseDTO> getClientById(BigInteger idClient);
+    List<ClientsResponseDTO> getClientById(Long idClient);
 
     /**
      * Update client.
      *
-     * @param clientsModifyRequestDTO the clients modify request DTO
+     * @param ClientsRequestDTO the clients request DTO
      */
-    void updateClient(ClientsModifyRequestDTO clientsModifyRequestDTO);
+    void updateClient(ClientsRequestDTO ClientsRequestDTO);
 
     /**
      * Delete client.
      *
      * @param idClient the id client
      */
-    void deleteClient(BigInteger idClient);
+    void deleteClient(Long idClient);
 }

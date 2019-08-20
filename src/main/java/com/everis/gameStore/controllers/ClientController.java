@@ -1,6 +1,5 @@
 package com.everis.gameStore.controllers;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.service.spi.ServiceException;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.everis.gameStore.domain.DTO.ClientListResponseDTO;
-import com.everis.gameStore.domain.DTO.ClientsModifyRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
 import com.everis.gameStore.facade.ClientFacade;
@@ -76,9 +73,9 @@ public class ClientController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @RequestMapping(value = "/getAllClients", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<ClientListResponseDTO> getAllClients() throws ServiceException {
+    public ResponseEntity<List<ClientsResponseDTO>> getAllClients() throws ServiceException {
         try {
-            return new ResponseEntity<ClientListResponseDTO>(clientFacade.getAllClients(), HttpStatus.OK);
+            return new ResponseEntity<List<ClientsResponseDTO>>(clientFacade.getAllClients(), HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -99,7 +96,7 @@ public class ClientController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @RequestMapping(value = "/getClientById(idClient)", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List<ClientsResponseDTO>> getClientById(@RequestParam BigInteger idClient)
+    public ResponseEntity<List<ClientsResponseDTO>> getClientById(@RequestParam Long idClient)
             throws ServiceException {
         try {
             return new ResponseEntity<List<ClientsResponseDTO>>(clientFacade.getClientById(idClient), HttpStatus.OK);
@@ -123,7 +120,7 @@ public class ClientController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @RequestMapping(value = "/updateClient", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<Void> updateClient(@RequestBody ClientsModifyRequestDTO clientsModifyRequestDTO)
+    public ResponseEntity<Void> updateClient(@RequestBody ClientsRequestDTO clientsModifyRequestDTO)
             throws ServiceException {
         try {
             clientFacade.updateClient(clientsModifyRequestDTO);
@@ -148,7 +145,7 @@ public class ClientController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @RequestMapping(value = "/deleteClient", method = RequestMethod.DELETE, produces = "application/json")
-    public ResponseEntity<Void> deleteClient(@RequestBody BigInteger idClient) throws ServiceException {
+    public ResponseEntity<Void> deleteClient(@RequestBody Long idClient) throws ServiceException {
         try {
             clientFacade.deleteClient(idClient);
             return new ResponseEntity<Void>(HttpStatus.OK);

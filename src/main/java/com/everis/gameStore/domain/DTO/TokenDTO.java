@@ -1,6 +1,5 @@
 package com.everis.gameStore.domain.DTO;
 
-import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
@@ -20,10 +19,10 @@ import lombok.Setter;
 public class TokenDTO {
 
 	/** The id token. */
-	private BigInteger idToken;
+	private Long idToken;
 
 	/** The id client. */
-	private BigInteger idClient;
+	private Long idClient;
 
 	/** The token. */
 	private String token;

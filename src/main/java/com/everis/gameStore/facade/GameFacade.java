@@ -1,10 +1,8 @@
 package com.everis.gameStore.facade;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import com.everis.gameStore.domain.DTO.GamesListResponseDTO;
-import com.everis.gameStore.domain.DTO.GamesModifyRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesResponseDTO;
 
@@ -33,19 +31,19 @@ public interface GameFacade {
      * @param idGames the id games
      * @return the game by id
      */
-    List<GamesResponseDTO> getGameById(BigInteger idGames);
+    List<GamesResponseDTO> getGameById(Long idGames);
 
     /**
      * Update game.
      *
-     * @param gamesModifyRequestVO the games modify request VO
+     * @param gamesRequestVO the games request VO
      */
-    void updateGame(GamesModifyRequestDTO gamesModifyRequestVO);
+    void updateGame(GamesRequestDTO gamesRequestVO);
 
     /**
      * Delete game.
      *
      * @param idGames the id games
      */
-    void deleteGame(BigInteger idGames);
+    void deleteGame(Long idGames);
 }

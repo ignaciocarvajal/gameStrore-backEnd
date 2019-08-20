@@ -1,6 +1,5 @@
 package com.everis.gameStore.domain.DTO;
 
-import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +19,7 @@ import lombok.Setter;
 public class ClientsResponseDTO {
 
     /** The id client. */
-    private BigInteger idClient;
+    private Long idClient;
 
     /** The nickname. */
     private String nickname;
@@ -34,10 +33,10 @@ public class ClientsResponseDTO {
     /** The token. */
     private String token;
 
-    /** The list acq game. */
+    /** The list acquired game. */
     private String listAcquiredGame;
 
-    /** The date acq game. */
+    /** The date acquired game. */
     private Timestamp dateAcquiredGame;
 
     /** The client roles. */

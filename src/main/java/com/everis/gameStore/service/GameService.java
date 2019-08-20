@@ -1,10 +1,8 @@
 package com.everis.gameStore.service;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import com.everis.gameStore.domain.DTO.GamesResponseDTO;
-import com.everis.gameStore.domain.VO.GamesModifyRequestVO;
 import com.everis.gameStore.domain.VO.GamesRequestVO;
 import com.everis.gameStore.domain.VO.GamesResponseVO;
 
@@ -33,19 +31,19 @@ public interface GameService {
      * @param idGames the id games
      * @return the game by id
      */
-    List<GamesResponseVO> getGameById(BigInteger idGames);
+    List<GamesResponseVO> getGameById(Long idGames);
 
     /**
      * Update game.
      *
-     * @param gamesModifyRequestVO the games modify request VO
+     * @param gamesRequestVO the games request VO
      */
-    void updateGame(GamesModifyRequestVO gamesModifyRequestVO);
+    void updateGame(GamesRequestVO gamesRequestVO);
 
     /**
      * Delete game.
      *
      * @param idGames the id games
      */
-    void deleteGame(BigInteger idGames);
+    void deleteGame(Long idGames);
 }
