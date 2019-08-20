@@ -21,11 +21,11 @@ public class ClientServiceImpl implements ClientService {
 
     /** The clients repository. */
     @Autowired
-    ClientsRepository clientsRepository;
+    private ClientsRepository clientsRepository;
 
     /** The client mapper. */
     @Autowired
-    ClientMapper clientMapper;
+    private ClientMapper clientMapper;
 
     /*
      * (non-Javadoc)

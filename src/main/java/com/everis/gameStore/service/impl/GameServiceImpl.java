@@ -21,11 +21,11 @@ public class GameServiceImpl implements GameService {
 
     /** The games repository. */
     @Autowired
-    GamesRepository gamesRepository;
+    private GamesRepository gamesRepository;
 
     /** The game mapper. */
     @Autowired
-    GameMapper gameMapper;
+    private GameMapper gameMapper;
 
     /*
      * (non-Javadoc)
