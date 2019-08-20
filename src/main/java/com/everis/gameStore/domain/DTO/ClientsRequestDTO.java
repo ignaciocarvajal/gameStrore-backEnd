@@ -25,9 +25,6 @@ public class ClientsRequestDTO {
     /** The password. */
     private String password;
 
-    /** The token. */
-    private String token;
-
     /** The roles. */
     private String roles;
 }

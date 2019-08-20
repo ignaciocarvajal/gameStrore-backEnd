@@ -44,10 +44,6 @@ public class Clients implements Serializable {
     @Column(name = "password")
     private String password;
 
-    /** The token. */
-    @Column(name = "token")
-    private String token;
-
     /** The list acquired game. */
     @Column(name = "list_acq_games")
     private String listAcquiredGame;
@@ -55,8 +51,7 @@ public class Clients implements Serializable {
     /** The date acquired game. */
     @Column(name = "date_acq_games")
     private Timestamp dateAcquiredGame;
-
-    /** The client roles. */
-    @Column(name = "client_rol")
+    
+    @Column(name="client_roles")
     private String clientRoles;
 }

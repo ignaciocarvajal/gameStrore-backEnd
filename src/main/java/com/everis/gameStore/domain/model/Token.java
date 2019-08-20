@@ -32,10 +32,6 @@ public class Token implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    /** The id client. */
-    @Column(name = "idclient")
-    private Long idClient;
-
     /** The token. */
     @Column(name = "token")
     private String token;

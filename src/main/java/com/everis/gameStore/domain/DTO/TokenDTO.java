@@ -21,9 +21,6 @@ public class TokenDTO {
 	/** The id token. */
 	private Long idToken;
 
-	/** The id client. */
-	private Long idClient;
-
 	/** The token. */
 	private String token;
 
