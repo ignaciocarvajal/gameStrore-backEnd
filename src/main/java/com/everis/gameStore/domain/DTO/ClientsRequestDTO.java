@@ -16,15 +16,18 @@ import lombok.Setter;
 @Builder
 public class ClientsRequestDTO {
 
-	/** The nick name. */
-	private String nickName;
+    /** The nick name. */
+    private String nickName;
 
-	/** The email. */
-	private String email;
+    /** The email. */
+    private String email;
 
-	/** The password. */
-	private String password;
+    /** The password. */
+    private String password;
 
-	/** The token. */
-	private String token;
+    /** The token. */
+    private String token;
+
+    /** The roles. */
+    private String roles;
 }
