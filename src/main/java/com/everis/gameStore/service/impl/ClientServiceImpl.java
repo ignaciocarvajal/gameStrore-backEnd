@@ -1,14 +1,15 @@
 package com.everis.gameStore.service.impl;
 
-import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.everis.gameStore.domain.VO.ClientsModifyRequestVO;
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
 import com.everis.gameStore.domain.VO.ClientsResponseVO;
+import com.everis.gameStore.domain.model.Clients;
+import com.everis.gameStore.mapper.ClientMapper;
 import com.everis.gameStore.repository.ClientsRepository;
 import com.everis.gameStore.service.ClientService;
 
@@ -22,6 +23,10 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     ClientsRepository clientsRepository;
 
+    /** The client mapper. */
+    @Autowired
+    ClientMapper clientMapper;
+
     /*
      * (non-Javadoc)
      * 
@@ -29,9 +34,8 @@ public class ClientServiceImpl implements ClientService {
      */
     @Override
     public void createClient(ClientsRequestVO clientsRequestVO) {
-        String roles = "";
-        clientsRepository.createClient(clientsRequestVO.getNickName(), clientsRequestVO.getEmail(),
-                clientsRequestVO.getPassword(), clientsRequestVO.getToken(), roles);
+        Clients clients = clientMapper.mapperClientsToClientsRequestVO(clientsRequestVO);
+        clientsRepository.save(clients);
     }
 
     /*
@@ -41,7 +45,16 @@ public class ClientServiceImpl implements ClientService {
      */
     @Override
     public List<ClientsResponseVO> getAllClients() {
-        return clientsRepository.getAllClients();
+        List<ClientsResponseVO> listClientsResponseVO = new ArrayList<>();
+        ClientsResponseVO clientsResponseVO = new ClientsResponseVO();
+        List<Clients> clients = (List<Clients>) clientsRepository.findAll();
+        for(Clients client: clients) {
+            clientsResponseVO = clientMapper.ClientsToListClientsResponseVO(client);  
+            listClientsResponseVO.add(clientsResponseVO);
+        }
+        
+      
+        return listClientsResponseVO;
     }
 
     /*
@@ -50,20 +63,20 @@ public class ClientServiceImpl implements ClientService {
      * @see com.everis.gameStore.service.ClientService#getClientById(java.math. BigInteger)
      */
     @Override
-    public List<ClientsResponseVO> getClientById(BigInteger idClient) {
-        List<ClientsResponseVO> listClientsResponseVO = clientsRepository.getClientById(idClient);
-        return listClientsResponseVO;
+    public List<ClientsResponseVO> getClientById(Long idClient) {
+        // List<ClientsResponseVO> listClientsResponseVO; = clientsRepository.getClientById(idClient);
+        return null;
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.everis.gameStore.service.ClientService#updateClient(java.math.BigInteger)
+     * @see com.everis.gameStore.service.ClientService#updateClient(com.everis.gameStore.domain.VO.ClientsRequestVO)
      */
     @Override
-    public void updateClient(ClientsModifyRequestVO clientsModifyRequestVO) {
-        clientsRepository.updateClient(clientsModifyRequestVO.getNickName(), clientsModifyRequestVO.getPassword(),
-                clientsModifyRequestVO.getEmail(), clientsModifyRequestVO.getId());
+    public void updateClient(ClientsRequestVO clientsRequestVO) {
+        Clients clients = clientMapper.mapperClientsToClientsRequestVO(clientsRequestVO);
+        clientsRepository.save(clients);
     }
 
     /*
@@ -72,7 +85,7 @@ public class ClientServiceImpl implements ClientService {
      * @see com.everis.gameStore.service.ClientService#deleteClient(java.math.BigInteger)
      */
     @Override
-    public void deleteClient(BigInteger idClient) {
-        clientsRepository.deleteClient(idClient);
+    public void deleteClient(Long idClient) {
+        clientsRepository.deleteById(idClient);
     }
 }
