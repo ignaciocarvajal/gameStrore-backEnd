@@ -22,11 +22,11 @@ public class ClientFacadeImpl implements ClientFacade {
 
     /** The client service. */
     @Autowired
-    ClientService clientService;
+    private ClientService clientService;
 
     /** The client mapper. */
     @Autowired
-    ClientMapper clientMapper;
+    private ClientMapper clientMapper;
 
     /*
      * (non-Javadoc)

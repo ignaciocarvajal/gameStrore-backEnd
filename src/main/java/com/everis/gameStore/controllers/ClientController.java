@@ -36,7 +36,7 @@ public class ClientController {
 
     /** The client facade. */
     @Autowired
-    ClientFacade clientFacade;
+    private ClientFacade clientFacade;
 
     /**
      * Creates the client.

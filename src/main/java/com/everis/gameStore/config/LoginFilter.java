@@ -9,14 +9,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.util.UrlPathHelper;
 
 import com.everis.gameStore.domain.model.Clients;
+import com.everis.gameStore.service.impl.UserDetailsServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -24,15 +28,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
+    /** The user details service. */
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+    /** The Constant urlPathHelper. */
+    private final static UrlPathHelper urlPathHelper = new UrlPathHelper();
+
     /**
      * Instantiates a new login filter.
      *
      * @param url the url
      * @param authManager the auth manager
+     * @param userDetailsService
      */
-    public LoginFilter(String url, AuthenticationManager authManager) {
+    public LoginFilter(String url, AuthenticationManager authManager, UserDetailsServiceImpl userDetailsService) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);
+        this.userDetailsService = userDetailsService;
     }
 
     /*
@@ -49,10 +62,12 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
         Clients client = new ObjectMapper().readValue(body, Clients.class);
 
+        UserDetails user = userDetailsService.loadUserByUsername(client.getNickname());
+
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        client.getNickname(),
-                        client.getPassword(),
+                        user.getUsername(),
+                        user.getPassword(),
                         Collections.emptyList()));
     }
 
@@ -70,5 +85,3 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
         JwtUtil.addAuthentication(res, auth.getName());
     }
 }
-
-

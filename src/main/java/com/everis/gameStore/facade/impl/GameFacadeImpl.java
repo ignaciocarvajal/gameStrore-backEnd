@@ -21,11 +21,11 @@ public class GameFacadeImpl implements GameFacade {
 
     /** The game service. */
     @Autowired
-    GameService gameService;
+    private GameService gameService;
 
     /** The game mapper. */
     @Autowired
-    GameMapper gameMapper;
+    private GameMapper gameMapper;
 
     /*
      * (non-Javadoc)

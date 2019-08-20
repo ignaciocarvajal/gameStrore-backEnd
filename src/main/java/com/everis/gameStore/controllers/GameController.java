@@ -37,7 +37,7 @@ public class GameController {
 
     /** The game facade. */
     @Autowired
-    GameFacade gameFacade;
+    private GameFacade gameFacade;
 
     /**
      * Creates the game.

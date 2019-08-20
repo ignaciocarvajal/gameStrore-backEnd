@@ -30,9 +30,6 @@ public class ClientsResponseDTO {
     /** The password. */
     private String password;
 
-    /** The token. */
-    private String token;
-
     /** The list acquired game. */
     private String listAcquiredGame;
 
