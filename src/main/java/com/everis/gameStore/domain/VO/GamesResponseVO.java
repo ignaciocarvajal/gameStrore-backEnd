@@ -1,6 +1,5 @@
 package com.everis.gameStore.domain.VO;
 
-import java.math.BigInteger;
 import java.sql.Blob;
 
 import lombok.AllArgsConstructor;
@@ -19,24 +18,24 @@ import lombok.Setter;
 @Builder
 public class GamesResponseVO {
 
-	/** The id games. */
-	private BigInteger idGames;
+    /** The id games. */
+    private Long idGames;
 
-	/** The game name. */
-	private String gameName;
+    /** The game name. */
+    private String gameName;
 
-	/** The img. */
-	private Blob img;
+    /** The img. */
+    private Blob img;
 
-	/** The act code. */
-	private String actCode;
+    /** The act code. */
+    private String actCode;
 
-	/** The value. */
-	private Integer value;
+    /** The value. */
+    private Integer value;
 
-	/** The stock. */
-	private Integer stock;
+    /** The stock. */
+    private Integer stock;
 
-	/** The id clients. */
-	private BigInteger idClients;
+    /** The id clients. */
+    private Long idClients;
 }

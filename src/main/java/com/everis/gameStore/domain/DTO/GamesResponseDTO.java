@@ -1,6 +1,5 @@
 package com.everis.gameStore.domain.DTO;
 
-import java.math.BigInteger;
 import java.sql.Blob;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +19,7 @@ import lombok.Setter;
 public class GamesResponseDTO {
 
 	/** The id games. */
-	private BigInteger idGames;
+	private Long idGames;
 
 	/** The game name. */
 	private String gameName;
@@ -38,5 +37,5 @@ public class GamesResponseDTO {
 	private Integer stock;
 
 	/** The id clients. */
-	private BigInteger idClients;
+	private Long idClients;
 }

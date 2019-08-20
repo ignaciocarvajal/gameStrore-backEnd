@@ -1,15 +1,15 @@
 package com.everis.gameStore.facade.impl;
 
-import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.everis.gameStore.domain.DTO.ClientListResponseDTO;
-import com.everis.gameStore.domain.DTO.ClientsModifyRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
+import com.everis.gameStore.domain.VO.ClientsRequestVO;
+import com.everis.gameStore.domain.VO.ClientsResponseVO;
 import com.everis.gameStore.facade.ClientFacade;
 import com.everis.gameStore.mapper.ClientMapper;
 import com.everis.gameStore.service.ClientService;
@@ -35,7 +35,8 @@ public class ClientFacadeImpl implements ClientFacade {
      */
     @Override
     public void createClient(ClientsRequestDTO clientsRequestDTO) {
-        clientService.createClient(null);
+        ClientsRequestVO clientsRequestVO = clientMapper.mapperClientsRequestDtoToGamesRequestVO(clientsRequestDTO);
+        clientService.createClient(clientsRequestVO);
     }
 
     /*
@@ -44,9 +45,15 @@ public class ClientFacadeImpl implements ClientFacade {
      * @see com.everis.gameStore.facade.ClientFacade#getAllClients()
      */
     @Override
-    public ClientListResponseDTO getAllClients() {
-        clientService.getAllClients();
-        return null;
+    public List<ClientsResponseDTO> getAllClients() {
+        List<ClientsResponseDTO> listClientsResponseDTO = new ArrayList<>();
+        ClientsResponseDTO clientsResponseDTO = new ClientsResponseDTO();
+        List<ClientsResponseVO> clientsResponseVO = clientService.getAllClients();
+        for (ClientsResponseVO clients : clientsResponseVO) {
+            clientsResponseDTO = clientMapper.ClientsResponseVoToListClientsResponseDTO(clients);
+            listClientsResponseDTO.add(clientsResponseDTO);
+        }
+        return listClientsResponseDTO;
     }
 
     /*
@@ -55,7 +62,7 @@ public class ClientFacadeImpl implements ClientFacade {
      * @see com.everis.gameStore.facade.ClientFacade#getClientById(java.math.BigInteger)
      */
     @Override
-    public List<ClientsResponseDTO> getClientById(BigInteger idClient) {
+    public List<ClientsResponseDTO> getClientById(Long idClient) {
         clientService.getClientById(idClient);
         return null;
     }
@@ -66,8 +73,9 @@ public class ClientFacadeImpl implements ClientFacade {
      * @see com.everis.gameStore.facade.ClientFacade#updateClient(java.math.BigInteger)
      */
     @Override
-    public void updateClient(ClientsModifyRequestDTO clientsModifyRequestDTO) {
-        clientService.updateClient(null);
+    public void updateClient(ClientsRequestDTO clientsRequestDTO) {
+        ClientsRequestVO clientsRequestVO = clientMapper.mapperClientsRequestDtoToGamesRequestVO(clientsRequestDTO);
+        clientService.updateClient(clientsRequestVO);
     }
 
     /*
@@ -76,7 +84,7 @@ public class ClientFacadeImpl implements ClientFacade {
      * @see com.everis.gameStore.facade.ClientFacade#deleteClient(java.math.BigInteger)
      */
     @Override
-    public void deleteClient(BigInteger idClient) {
+    public void deleteClient(Long idClient) {
         clientService.deleteClient(idClient);
     }
 }

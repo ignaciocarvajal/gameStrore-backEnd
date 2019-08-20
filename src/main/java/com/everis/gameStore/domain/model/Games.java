@@ -1,7 +1,6 @@
 package com.everis.gameStore.domain.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.sql.Blob;
 
 import javax.persistence.Column;
@@ -25,35 +24,35 @@ import lombok.Setter;
 @Table(name = "games")
 public class Games implements Serializable {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/** The id. */
-	@Id
-	@Column(name = "id")
-	private BigInteger id;
+    /** The id. */
+    @Id
+    @Column(name = "id")
+    private Long id;
 
-	/** The game name. */
-	@Column(name = "game_name")
-	private String gameName;
+    /** The game name. */
+    @Column(name = "game_name")
+    private String gameName;
 
-	/** The image. */
-	@Column(name = "image")
-	private Blob image;
+    /** The image. */
+    @Column(name = "image")
+    private Blob image;
 
-	/** The activation code. */
-	@Column(name = "activation_code")
-	private String activationCode;
+    /** The activation code. */
+    @Column(name = "activation_code")
+    private String activationCode;
 
-	/** The value. */
-	@Column(name = "value")
-	private Integer value;
+    /** The value. */
+    @Column(name = "value")
+    private Integer value;
 
-	/** The stock. */
-	@Column(name = "stock")
-	private Integer stock;
+    /** The stock. */
+    @Column(name = "stock")
+    private Integer stock;
 
-	/** The id clients. */
-	@Column(name = "id_clients")
-	private BigInteger idClients;
+    /** The id clients. */
+    @Column(name = "id_clients")
+    private Long idClients;
 }

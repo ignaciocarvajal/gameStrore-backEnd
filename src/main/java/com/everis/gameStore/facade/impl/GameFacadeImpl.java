@@ -1,15 +1,14 @@
 package com.everis.gameStore.facade.impl;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.everis.gameStore.domain.DTO.GamesListResponseDTO;
-import com.everis.gameStore.domain.DTO.GamesModifyRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesResponseDTO;
+import com.everis.gameStore.domain.VO.GamesRequestVO;
 import com.everis.gameStore.facade.GameFacade;
 import com.everis.gameStore.mapper.GameMapper;
 import com.everis.gameStore.service.GameService;
@@ -35,7 +34,8 @@ public class GameFacadeImpl implements GameFacade {
      */
     @Override
     public void createGame(GamesRequestDTO gamesRequestDTO) {
-        gameService.createGame(null);
+        GamesRequestVO gamesRequestVO = gameMapper.GamesRequestDtoToGamesRequestVO(gamesRequestDTO);
+        gameService.createGame(gamesRequestVO);
     }
 
     /*
@@ -45,8 +45,9 @@ public class GameFacadeImpl implements GameFacade {
      */
     @Override
     public GamesListResponseDTO getAllGames() {
+        GamesListResponseDTO listGamesResponseDTO = new GamesListResponseDTO();
         gameService.getAllGames();
-        return null;
+        return listGamesResponseDTO;
     }
 
     /*
@@ -55,7 +56,7 @@ public class GameFacadeImpl implements GameFacade {
      * @see com.everis.gameStore.facade.GameFacade#getGameById(java.math.BigInteger)
      */
     @Override
-    public List<GamesResponseDTO> getGameById(BigInteger idGames) {
+    public List<GamesResponseDTO> getGameById(Long idGames) {
         gameService.getGameById(idGames);
         return null;
     }
@@ -66,8 +67,9 @@ public class GameFacadeImpl implements GameFacade {
      * @see com.everis.gameStore.facade.GameFacade#updateGame(com.everis.gameStore.domain.VO.GamesModifyRequestVO)
      */
     @Override
-    public void updateGame(GamesModifyRequestDTO gamesModifyRequestDTO) {
-        gameService.updateGame(null);
+    public void updateGame(GamesRequestDTO gamesRequestDTO) {
+        GamesRequestVO gamesRequestVO = gameMapper.GamesRequestDtoToGamesRequestVO(gamesRequestDTO);
+        gameService.updateGame(gamesRequestVO);
     }
 
     /*
@@ -76,7 +78,7 @@ public class GameFacadeImpl implements GameFacade {
      * @see com.everis.gameStore.facade.GameFacade#deleteGame(java.math.BigInteger)
      */
     @Override
-    public void deleteGame(BigInteger idGames) {
+    public void deleteGame(Long idGames) {
         gameService.deleteGame(idGames);
     }
 }

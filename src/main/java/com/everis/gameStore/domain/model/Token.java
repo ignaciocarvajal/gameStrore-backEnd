@@ -1,7 +1,6 @@
 package com.everis.gameStore.domain.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -22,26 +21,26 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tokens")
+@Table(name = "token")
 public class Token implements Serializable {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/** The id. */
-	@Id
-	@Column(name = "id")
-	private BigInteger id;
+    /** The id. */
+    @Id
+    @Column(name = "id")
+    private Long id;
 
-	/** The id client. */
-	@Column(name = "idclient")
-	private BigInteger idClient;
+    /** The id client. */
+    @Column(name = "idclient")
+    private Long idClient;
 
-	/** The token. */
-	@Column(name = "token")
-	private String token;
+    /** The token. */
+    @Column(name = "token")
+    private String token;
 
-	/** The expiration date. */
-	@Column(name = "expiration_date")
-	private Timestamp expirationDate;
+    /** The expiration date. */
+    @Column(name = "expiration_date")
+    private Timestamp expirationDate;
 }

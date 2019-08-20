@@ -1,9 +1,10 @@
+/*
+ * 
+ */
 package com.everis.gameStore.service;
 
-import java.math.BigInteger;
 import java.util.List;
 
-import com.everis.gameStore.domain.VO.ClientsModifyRequestVO;
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
 import com.everis.gameStore.domain.VO.ClientsResponseVO;
 
@@ -15,9 +16,9 @@ public interface ClientService {
     /**
      * Creates the client.
      *
-     * @param ClientsRequestVO the clients request VO
+     * @param clientsRequestVO the clients request VO
      */
-    void createClient(ClientsRequestVO ClientsRequestVO);
+    void createClient(ClientsRequestVO clientsRequestVO);
 
     /**
      * Gets the all clients.
@@ -32,19 +33,19 @@ public interface ClientService {
      * @param idClient the id client
      * @return the client by id
      */
-    List<ClientsResponseVO> getClientById(BigInteger idClient);
+    List<ClientsResponseVO> getClientById(Long idClient);
 
     /**
      * Update client.
      *
-     * @param clientsModifyRequestVO the clients modify request VO
+     * @param ClientsRequestVO the clients request VO
      */
-    void updateClient(ClientsModifyRequestVO clientsModifyRequestVO);
+    void updateClient(ClientsRequestVO ClientsRequestVO);
 
     /**
      * Delete client.
      *
      * @param idClient the id client
      */
-    void deleteClient(BigInteger idClient);
+    void deleteClient(Long idClient);
 }

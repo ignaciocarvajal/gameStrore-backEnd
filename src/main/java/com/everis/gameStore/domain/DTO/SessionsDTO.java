@@ -1,7 +1,5 @@
 package com.everis.gameStore.domain.DTO;
 
-import java.math.BigInteger;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,12 +16,12 @@ import lombok.Setter;
 @Builder
 public class SessionsDTO {
 
-	/** The id sessions. */
-	private BigInteger idSessions;
+    /** The id sessions. */
+    private Long idSessions;
 
-	/** The id clients. */
-	private BigInteger idClients;
+    /** The id clients. */
+    private Long idClients;
 
-	/** The id tokens. */
-	private BigInteger idTokens;
+    /** The id tokens. */
+    private Long idTokens;
 }

@@ -1,6 +1,5 @@
 package com.everis.gameStore.domain.VO;
 
-import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
@@ -19,15 +18,15 @@ import lombok.Setter;
 @Builder
 public class TokenVO {
 
-	/** The id token. */
-	private BigInteger idToken;
+    /** The id token. */
+    private Long idToken;
 
-	/** The id client. */
-	private BigInteger idClient;
+    /** The id client. */
+    private Long idClient;
 
-	/** The token. */
-	private String token;
+    /** The token. */
+    private String token;
 
-	/** The exp date. */
-	private Timestamp expDate;
+    /** The exp date. */
+    private Timestamp expDate;
 }
