@@ -7,17 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.everis.gameStore.domain.util.Constants;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * The Class ClientRoles.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "client_rol")
+@Table(name = Constants.CLIENT_ROLES)
 public class ClientRoles implements Serializable {
 
     /** The Constant serialVersionUID. */
