@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.everis.gameStore.domain.DTO.ClientsRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
+import com.everis.gameStore.domain.DTO.RolesResponseDTO;
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
 import com.everis.gameStore.domain.VO.ClientsResponseVO;
 import com.everis.gameStore.facade.ClientFacade;
@@ -62,9 +63,11 @@ public class ClientFacadeImpl implements ClientFacade {
      * @see com.everis.gameStore.facade.ClientFacade#getClientById(java.math.BigInteger)
      */
     @Override
-    public List<ClientsResponseDTO> getClientById(Long idClient) {
-        clientService.getClientById(idClient);
-        return null;
+    public ClientsResponseDTO getClientById(Long idClient) {
+        ClientsResponseDTO clientsResponseDTO= new ClientsResponseDTO();
+        ClientsResponseVO clientsResponseVO = clientService.getClientById(idClient);
+        clientsResponseDTO = clientMapper.ClientsResponseVoToClientsResponseDTO(clientsResponseVO);
+        return clientsResponseDTO;
     }
 
     /*
@@ -86,5 +89,11 @@ public class ClientFacadeImpl implements ClientFacade {
     @Override
     public void deleteClient(Long idClient) {
         clientService.deleteClient(idClient);
+    }
+
+    @Override
+    public List<RolesResponseDTO> getAllRoles() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

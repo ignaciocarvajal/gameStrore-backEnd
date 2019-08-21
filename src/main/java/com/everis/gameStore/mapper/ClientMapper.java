@@ -20,8 +20,23 @@ public interface ClientMapper {
      * @param clientsRequestDTO the clients request DTO
      * @return the clients request VO
      */
-
     ClientsRequestVO mapperClientsRequestDtoToGamesRequestVO(ClientsRequestDTO clientsRequestDTO);
+
+    /**
+     * Clients response vo to clients response DTO.
+     *
+     * @param clientsResponseVO the clients response VO
+     * @return the clients response DTO
+     */
+    ClientsResponseDTO ClientsResponseVoToClientsResponseDTO(ClientsResponseVO clientsResponseVO);
+
+    /**
+     * Clients response vo to list clients response DTO.
+     *
+     * @param clients the clients
+     * @return the clients response DTO
+     */
+    ClientsResponseDTO ClientsResponseVoToListClientsResponseDTO(ClientsResponseVO clients);
 
     /**
      * Mapper clients to clients request VO.
@@ -32,26 +47,19 @@ public interface ClientMapper {
     Clients mapperClientsToClientsRequestVO(ClientsRequestVO clientsRequestVO);
 
     /**
-     * To target.
-     *
-     * @param clientsRequestDTO the clients request DTO
-     * @return the clients
-     */
-    Clients toTarget(ClientsRequestDTO clientsRequestDTO);
-
-    /**
-     * Clients response vo to list clients response DTO.
-     *
-     * @param clientsResponseVO the clients response VO
-     * @return the list
-     */
-    ClientsResponseDTO ClientsResponseVoToListClientsResponseDTO(ClientsResponseVO clientsResponseVO);
-
-    /**
      * Clients to list clients response VO.
+     *
+     * @param client the client
+     * @return the clients response VO
+     */
+    ClientsResponseVO ClientsToListClientsResponseVO(Clients client);
+
+    /**
+     * Clients to clients response VO.
      *
      * @param clients the clients
      * @return the clients response VO
      */
-    ClientsResponseVO ClientsToListClientsResponseVO(Clients clients);
+    ClientsResponseVO ClientsToClientsResponseVO(Clients clients);
+
 }

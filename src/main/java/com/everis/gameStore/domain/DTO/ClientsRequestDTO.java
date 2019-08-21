@@ -21,7 +21,7 @@ import lombok.Setter;
 public class ClientsRequestDTO {
 
     /** The nick name. */
-    private String nickName;
+    private String nickname;
 
     /** The email. */
     private String email;

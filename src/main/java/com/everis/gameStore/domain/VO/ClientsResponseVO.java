@@ -1,6 +1,9 @@
 package com.everis.gameStore.domain.VO;
 
 import java.sql.Timestamp;
+import java.util.Set;
+
+import com.everis.gameStore.domain.model.Roles;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,6 +39,6 @@ public class ClientsResponseVO {
     /** The date acquired game. */
     private Timestamp dateAcquiredGame;
 
-    /** The client roles. */
-    private String clientRoles;
+    /** The roles. */
+    private Set<Roles> roles;
 }
