@@ -34,17 +34,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.everis.gameStore.domain.model.Clients clients = clientsRepository.findByNickname(username);
+        com.everis.gameStore.domain.model.Clients clients = clientsRepository.findByEmail(username);
 
         Set grantList = new HashSet();
 
-        Roles roles = new Roles();
-        roles.setDescription(clients.getClientRoles());
+        for (Roles roles : clients.getRoles()) {
+            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(roles.getDescription());
+            grantList.add(grantedAuthority);
+        }
 
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(roles.getDescription());
-        grantList.add(grantedAuthority);
-
-        UserDetails user = (UserDetails) new User(clients.getNickname(), clients.getPassword(), grantList);
+        UserDetails user = (UserDetails) new User(clients.getEmail(), clients.getPassword(), grantList);
         return user;
     }
 }
