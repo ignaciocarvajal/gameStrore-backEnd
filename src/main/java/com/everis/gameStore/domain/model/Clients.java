@@ -2,10 +2,16 @@ package com.everis.gameStore.domain.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -52,6 +58,9 @@ public class Clients implements Serializable {
     @Column(name = "date_acq_games")
     private Timestamp dateAcquiredGame;
     
-    @Column(name="client_roles")
-    private String clientRoles;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "client_rol", 
+      joinColumns = @JoinColumn(name = "id_clientrol"), 
+      inverseJoinColumns = @JoinColumn(name = "id_rol"))
+    private Set<Roles> roles = new HashSet<>();
 }

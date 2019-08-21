@@ -1,5 +1,9 @@
 package com.everis.gameStore.domain.DTO;
 
+import java.util.Set;
+
+import com.everis.gameStore.domain.model.Roles;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,5 +30,5 @@ public class ClientsRequestDTO {
     private String password;
 
     /** The roles. */
-    private String roles;
+    private Set<Roles> roles;
 }
