@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
 import com.everis.gameStore.domain.VO.ClientsResponseVO;
+import com.everis.gameStore.domain.VO.RolesResponseVO;
 
 /**
  * The Interface ClientService.
@@ -48,4 +49,11 @@ public interface ClientService {
      * @param idClient the id client
      */
     void deleteClient(Long idClient);
+
+    /**
+     * Gets the all roles.
+     *
+     * @return the all roles
+     */
+    List<RolesResponseVO> getAllRoles();
 }

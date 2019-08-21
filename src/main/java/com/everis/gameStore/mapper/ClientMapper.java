@@ -4,9 +4,12 @@ import org.mapstruct.Mapper;
 
 import com.everis.gameStore.domain.DTO.ClientsRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
+import com.everis.gameStore.domain.DTO.RolesResponseDTO;
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
 import com.everis.gameStore.domain.VO.ClientsResponseVO;
+import com.everis.gameStore.domain.VO.RolesResponseVO;
 import com.everis.gameStore.domain.model.Clients;
+import com.everis.gameStore.domain.model.Roles;
 
 /**
  * The Interface ClientMapper.
@@ -61,5 +64,21 @@ public interface ClientMapper {
      * @return the clients response VO
      */
     ClientsResponseVO ClientsToClientsResponseVO(Clients clients);
+
+    /**
+     * Roles response vo to list roles response DTO.
+     *
+     * @param roles the roles
+     * @return the roles response DTO
+     */
+    RolesResponseDTO RolesResponseVoToListRolesResponseDTO(RolesResponseVO roles);
+
+    /**
+     * Roles response vo to roles.
+     *
+     * @param roles the roles
+     * @return the roles response VO
+     */
+    RolesResponseVO RolesResponseVoToRoles(Roles roles);
 
 }

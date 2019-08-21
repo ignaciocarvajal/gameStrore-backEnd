@@ -11,6 +11,7 @@ import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
 import com.everis.gameStore.domain.DTO.RolesResponseDTO;
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
 import com.everis.gameStore.domain.VO.ClientsResponseVO;
+import com.everis.gameStore.domain.VO.RolesResponseVO;
 import com.everis.gameStore.facade.ClientFacade;
 import com.everis.gameStore.mapper.ClientMapper;
 import com.everis.gameStore.service.ClientService;
@@ -64,7 +65,7 @@ public class ClientFacadeImpl implements ClientFacade {
      */
     @Override
     public ClientsResponseDTO getClientById(Long idClient) {
-        ClientsResponseDTO clientsResponseDTO= new ClientsResponseDTO();
+        ClientsResponseDTO clientsResponseDTO = new ClientsResponseDTO();
         ClientsResponseVO clientsResponseVO = clientService.getClientById(idClient);
         clientsResponseDTO = clientMapper.ClientsResponseVoToClientsResponseDTO(clientsResponseVO);
         return clientsResponseDTO;
@@ -91,9 +92,21 @@ public class ClientFacadeImpl implements ClientFacade {
         clientService.deleteClient(idClient);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.everis.gameStore.facade.ClientFacade#getAllRoles()
+     */
     @Override
     public List<RolesResponseDTO> getAllRoles() {
-        // TODO Auto-generated method stub
-        return null;
+        List<RolesResponseDTO> listRolesResponseDTO = new ArrayList<>();
+        RolesResponseDTO rolesResponseDTO = new RolesResponseDTO();
+
+        List<RolesResponseVO> listRolesResponseVO = clientService.getAllRoles();
+        for (RolesResponseVO roles : listRolesResponseVO) {
+            rolesResponseDTO = clientMapper.RolesResponseVoToListRolesResponseDTO(roles);
+            listRolesResponseDTO.add(rolesResponseDTO);
+        }
+        return listRolesResponseDTO;
     }
 }
