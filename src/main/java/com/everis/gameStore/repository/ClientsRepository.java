@@ -21,4 +21,7 @@ public interface ClientsRepository extends PagingAndSortingRepository<Clients, L
      */
     @Query("SELECT cl FROM com.everis.gameStore.domain.model.Clients cl WHERE cl.nickname= :nickname")
     Clients findByNickname(@Param("nickname") String username);
+    
+    
+    Clients findByEmail(String email);
 }
