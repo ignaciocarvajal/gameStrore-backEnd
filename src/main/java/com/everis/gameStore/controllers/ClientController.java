@@ -95,11 +95,11 @@ public class ClientController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/getClientById(idClient)", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List<ClientsResponseDTO>> getClientById(@RequestParam Long idClient)
+    @RequestMapping(value = "/getClientById{idClient}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<ClientsResponseDTO> getClientById(@RequestParam Long idClient)
             throws ServiceException {
         try {
-            return new ResponseEntity<List<ClientsResponseDTO>>(clientFacade.getClientById(idClient), HttpStatus.OK);
+            return new ResponseEntity<ClientsResponseDTO>(clientFacade.getClientById(idClient), HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -145,7 +145,7 @@ public class ClientController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @RequestMapping(value = "/deleteClient", method = RequestMethod.DELETE, produces = "application/json")
-    public ResponseEntity<Void> deleteClient(@RequestBody Long idClient) throws ServiceException {
+    public ResponseEntity<Void> deleteClient(@RequestParam Long idClient) throws ServiceException {
         try {
             clientFacade.deleteClient(idClient);
             return new ResponseEntity<Void>(HttpStatus.OK);

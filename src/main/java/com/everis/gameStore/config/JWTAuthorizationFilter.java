@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.everis.gameStore.domain.util.Constants;
+
 import io.jsonwebtoken.Jwts;
 
 /**
@@ -40,9 +42,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws IOException, ServletException {
-        String header = req.getHeader("Authorization");
+        String header = req.getHeader(Constants.AUTHORIZATION);
 
-        if (header == null || !header.startsWith("Bearer")) {
+        if (header == null || !header.startsWith(Constants.BEARER)) {
             chain.doFilter(req, res);
             return;
         }
@@ -59,11 +61,11 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
      * @return the authentication
      */
     static UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader(Constants.AUTHORIZATION);
         if (token != null) {
             String user = Jwts.parser()
-                    .setSigningKey("G4m3570r3")
-                    .parseClaimsJws(token.replace("Bearer", ""))
+                    .setSigningKey(Constants.SECRET_KEY)
+                    .parseClaimsJws(token.replace(Constants.BEARER, ""))
                     .getBody()
                     .getSubject();
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.everis.gameStore.domain.DTO.ClientsRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
+import com.everis.gameStore.domain.DTO.RolesResponseDTO;
 
 /**
  * The Interface ClientFacade.
@@ -30,7 +31,7 @@ public interface ClientFacade {
      * @param idClient the id client
      * @return the client by id
      */
-    List<ClientsResponseDTO> getClientById(Long idClient);
+    ClientsResponseDTO getClientById(Long idClient);
 
     /**
      * Update client.
@@ -45,4 +46,11 @@ public interface ClientFacade {
      * @param idClient the id client
      */
     void deleteClient(Long idClient);
+
+    /**
+     * Gets the all roles.
+     *
+     * @return the all roles
+     */
+    List<RolesResponseDTO> getAllRoles();
 }

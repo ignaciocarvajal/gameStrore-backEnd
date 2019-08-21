@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
@@ -34,6 +35,8 @@ public class ClientServiceImpl implements ClientService {
      */
     @Override
     public void createClient(ClientsRequestVO clientsRequestVO) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+        clientsRequestVO.setPassword(bCryptPasswordEncoder.encode(clientsRequestVO.getPassword()));
         Clients clients = clientMapper.mapperClientsToClientsRequestVO(clientsRequestVO);
         clientsRepository.save(clients);
     }
@@ -48,24 +51,24 @@ public class ClientServiceImpl implements ClientService {
         List<ClientsResponseVO> listClientsResponseVO = new ArrayList<>();
         ClientsResponseVO clientsResponseVO = new ClientsResponseVO();
         List<Clients> clients = (List<Clients>) clientsRepository.findAll();
-        for(Clients client: clients) {
-            clientsResponseVO = clientMapper.ClientsToListClientsResponseVO(client);  
+        for (Clients client : clients) {
+            clientsResponseVO = clientMapper.ClientsToListClientsResponseVO(client);
             listClientsResponseVO.add(clientsResponseVO);
         }
-        
-      
         return listClientsResponseVO;
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.everis.gameStore.service.ClientService#getClientById(java.math. BigInteger)
+     * @see com.everis.gameStore.service.ClientService#getClientById(java.lang.Long)
      */
     @Override
-    public List<ClientsResponseVO> getClientById(Long idClient) {
-        // List<ClientsResponseVO> listClientsResponseVO; = clientsRepository.getClientById(idClient);
-        return null;
+    public ClientsResponseVO getClientById(Long idClient) {
+        ClientsResponseVO clientsResponseVO = new ClientsResponseVO();
+        Clients clients = clientsRepository.findByIdClient(idClient);
+        clientsResponseVO = clientMapper.ClientsToClientsResponseVO(clients);
+        return clientsResponseVO;
     }
 
     /*
@@ -75,7 +78,10 @@ public class ClientServiceImpl implements ClientService {
      */
     @Override
     public void updateClient(ClientsRequestVO clientsRequestVO) {
-        Clients clients = clientMapper.mapperClientsToClientsRequestVO(clientsRequestVO);
+        Clients clients = clientsRepository.findByPassword(clientsRequestVO.getPassword());
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+        clientsRequestVO.setPassword(bCryptPasswordEncoder.encode(clientsRequestVO.getPassword()));
+        clients = clientMapper.mapperClientsToClientsRequestVO(clientsRequestVO);
         clientsRepository.save(clients);
     }
 

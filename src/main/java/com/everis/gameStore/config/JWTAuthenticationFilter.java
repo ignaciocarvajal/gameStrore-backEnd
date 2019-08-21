@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.everis.gameStore.domain.model.Clients;
+import com.everis.gameStore.domain.util.Constants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Claims;
@@ -77,14 +78,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Claims claims = Jwts.claims().setSubject(((User) auth.getPrincipal()).getUsername());
 
         for (GrantedAuthority grantedAuthority : authorities) {
-            claims.put("rol", grantedAuthority.getAuthority());
+            claims.put(Constants.ROL, grantedAuthority.getAuthority());
         }
 
         String token = Jwts.builder()
                 .setClaims(claims)
-                .setExpiration(new Date(System.currentTimeMillis() + 180000)) // 1 minuto => 60.000 milisec
-                .signWith(SignatureAlgorithm.HS512, "G4m3570r3")
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 minuto => 60.000 milisec
+                .signWith(SignatureAlgorithm.HS512, Constants.SECRET_KEY)
                 .compact();
-        res.addHeader("Authorization", "Bearer " + token);
+        res.addHeader(Constants.AUTHORIZATION, Constants.BEARER + Constants.WHITE_SPACE + token);
     }
 }

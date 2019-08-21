@@ -33,7 +33,7 @@ public interface ClientService {
      * @param idClient the id client
      * @return the client by id
      */
-    List<ClientsResponseVO> getClientById(Long idClient);
+    ClientsResponseVO getClientById(Long idClient);
 
     /**
      * Update client.
