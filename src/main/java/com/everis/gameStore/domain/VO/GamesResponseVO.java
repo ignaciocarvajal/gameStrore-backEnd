@@ -24,11 +24,11 @@ public class GamesResponseVO {
     /** The game name. */
     private String gameName;
 
-    /** The img. */
-    private Blob img;
+    /** The image. */
+    private Blob image;
 
-    /** The act code. */
-    private String actCode;
+    /** The activation code. */
+    private String activationCode;
 
     /** The value. */
     private Integer value;

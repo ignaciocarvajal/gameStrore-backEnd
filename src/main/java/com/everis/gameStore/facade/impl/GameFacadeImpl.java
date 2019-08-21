@@ -1,14 +1,15 @@
 package com.everis.gameStore.facade.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.everis.gameStore.domain.DTO.GamesListResponseDTO;
 import com.everis.gameStore.domain.DTO.GamesRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesResponseDTO;
 import com.everis.gameStore.domain.VO.GamesRequestVO;
+import com.everis.gameStore.domain.VO.GamesResponseVO;
 import com.everis.gameStore.facade.GameFacade;
 import com.everis.gameStore.mapper.GameMapper;
 import com.everis.gameStore.service.GameService;
@@ -44,9 +45,15 @@ public class GameFacadeImpl implements GameFacade {
      * @see com.everis.gameStore.facade.GameFacade#getAllGames()
      */
     @Override
-    public GamesListResponseDTO getAllGames() {
-        GamesListResponseDTO listGamesResponseDTO = new GamesListResponseDTO();
-        gameService.getAllGames();
+    public List<GamesResponseDTO> getAllGames() {
+        List<GamesResponseDTO> listGamesResponseDTO = new ArrayList<>();
+        GamesResponseDTO gamesListResponseDTO = new GamesResponseDTO();
+        
+        List<GamesResponseVO> listGamesResponseVO = gameService.getAllGames();
+        for (GamesResponseVO games : listGamesResponseVO) {
+            gamesListResponseDTO = gameMapper.GamesResponseVoToGamesResponseDTO(games);
+            listGamesResponseDTO.add(gamesListResponseDTO);
+        }
         return listGamesResponseDTO;
     }
 
@@ -56,9 +63,11 @@ public class GameFacadeImpl implements GameFacade {
      * @see com.everis.gameStore.facade.GameFacade#getGameById(java.math.BigInteger)
      */
     @Override
-    public List<GamesResponseDTO> getGameById(Long idGames) {
-        gameService.getGameById(idGames);
-        return null;
+    public GamesResponseDTO getGameById(Long idGames) {
+        GamesResponseDTO gamesResponseDTO = new GamesResponseDTO();
+        GamesResponseVO gamesResponseVO = gameService.getGameById(idGames);
+        gamesResponseDTO = gameMapper.GamesResponseVoToGamesResponseDTO(gamesResponseVO);
+        return gamesResponseDTO;
     }
 
     /*

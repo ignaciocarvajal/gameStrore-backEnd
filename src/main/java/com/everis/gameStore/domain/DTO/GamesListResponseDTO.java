@@ -19,5 +19,5 @@ import lombok.Setter;
 public class GamesListResponseDTO {
 
 	/** The list games response DTO. */
-	private List<GamesResponseDTO> listGamesResponseDTO;
+	private List<GamesResponseDTO> listGamesResponse;
 }

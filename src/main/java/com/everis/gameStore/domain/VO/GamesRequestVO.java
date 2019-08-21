@@ -21,8 +21,8 @@ public class GamesRequestVO {
 	/** The game name. */
 	private String gameName;
 
-	/** The img. */
-	private Blob img;
+	/** The image. */
+	private Blob image;
 
 	/** The value. */
 	private Integer value;

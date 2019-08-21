@@ -2,7 +2,6 @@ package com.everis.gameStore.service;
 
 import java.util.List;
 
-import com.everis.gameStore.domain.DTO.GamesResponseDTO;
 import com.everis.gameStore.domain.VO.GamesRequestVO;
 import com.everis.gameStore.domain.VO.GamesResponseVO;
 
@@ -23,7 +22,7 @@ public interface GameService {
      *
      * @return the all games
      */
-    List<GamesResponseDTO> getAllGames();
+    List<GamesResponseVO> getAllGames();
 
     /**
      * Gets the game by id.
@@ -31,7 +30,7 @@ public interface GameService {
      * @param idGames the id games
      * @return the game by id
      */
-    List<GamesResponseVO> getGameById(Long idGames);
+    GamesResponseVO getGameById(Long idGames);
 
     /**
      * Update game.

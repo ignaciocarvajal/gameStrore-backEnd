@@ -19,5 +19,5 @@ import lombok.Setter;
 public class GamesListResponseVO {
 
 	/** The list games response VO. */
-	private List<GamesResponseVO> listGamesResponseVO;
+	private List<GamesResponseVO> listGamesResponse;
 }
