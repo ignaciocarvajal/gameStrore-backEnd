@@ -36,8 +36,9 @@ public interface GameService {
      * Update game.
      *
      * @param gamesRequestVO the games request VO
+     * @param id the id
      */
-    void updateGame(GamesRequestVO gamesRequestVO);
+    void updateGame(GamesRequestVO gamesRequestVO, Long id);
 
     /**
      * Delete game.

@@ -37,8 +37,9 @@ public interface ClientFacade {
      * Update client.
      *
      * @param ClientsRequestDTO the clients request DTO
+     * @param id the id
      */
-    void updateClient(ClientsRequestDTO ClientsRequestDTO);
+    void updateClient(ClientsRequestDTO ClientsRequestDTO, Long id);
 
     /**
      * Delete client.

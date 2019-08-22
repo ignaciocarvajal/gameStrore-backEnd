@@ -9,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.gameStore.domain.DTO.ClientsRequestDTO;
@@ -50,7 +54,7 @@ public class ClientController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/createClient", method = RequestMethod.POST, produces = "application/json")
+    @PostMapping(value = "/create")
     public void createClient(@RequestBody(required = true) ClientsRequestDTO clientsRequestDTO)
             throws ServiceException {
         try {
@@ -72,7 +76,7 @@ public class ClientController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/getAllClients", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/")
     public ResponseEntity<List<ClientsResponseDTO>> getAllClients() throws ServiceException {
         try {
             return new ResponseEntity<List<ClientsResponseDTO>>(clientFacade.getAllClients(), HttpStatus.OK);
@@ -95,11 +99,11 @@ public class ClientController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/getClientById{idClient}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<ClientsResponseDTO> getClientById(@RequestParam Long idClient)
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ClientsResponseDTO> getClientById(@PathVariable(value = "id") Long id)
             throws ServiceException {
         try {
-            return new ResponseEntity<ClientsResponseDTO>(clientFacade.getClientById(idClient), HttpStatus.OK);
+            return new ResponseEntity<ClientsResponseDTO>(clientFacade.getClientById(id), HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -119,11 +123,12 @@ public class ClientController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/updateClient", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<Void> updateClient(@RequestBody ClientsRequestDTO clientsModifyRequestDTO)
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<Void> updateClient(@RequestBody ClientsRequestDTO clientsModifyRequestDTO,
+            @PathVariable(value = "id") Long id)
             throws ServiceException {
         try {
-            clientFacade.updateClient(clientsModifyRequestDTO);
+            clientFacade.updateClient(clientsModifyRequestDTO, id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -144,10 +149,10 @@ public class ClientController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/deleteClient", method = RequestMethod.DELETE, produces = "application/json")
-    public ResponseEntity<Void> deleteClient(@RequestParam Long idClient) throws ServiceException {
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Void> deleteClient(@PathVariable(value = "id") Long id) throws ServiceException {
         try {
-            clientFacade.deleteClient(idClient);
+            clientFacade.deleteClient(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);

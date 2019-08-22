@@ -45,13 +45,13 @@ public class GameServiceImpl implements GameService {
      */
     @Override
     public List<GamesResponseVO> getAllGames() {
-         List<GamesResponseVO> listGamesResponseVO = new ArrayList<>();
-         GamesResponseVO gamesResponseVO = new GamesResponseVO();
-         List<Games> listGames = (List<Games>) gamesRepository.findAll();
-         for(Games games : listGames) {
-             gamesResponseVO = gameMapper.GamesToListGamesResponseVO(games);
-             listGamesResponseVO.add(gamesResponseVO);
-         }
+        List<GamesResponseVO> listGamesResponseVO = new ArrayList<>();
+        GamesResponseVO gamesResponseVO = new GamesResponseVO();
+        List<Games> listGames = (List<Games>) gamesRepository.findAll();
+        for (Games games : listGames) {
+            gamesResponseVO = gameMapper.GamesToListGamesResponseVO(games);
+            listGamesResponseVO.add(gamesResponseVO);
+        }
         return listGamesResponseVO;
     }
 
@@ -71,10 +71,11 @@ public class GameServiceImpl implements GameService {
     /*
      * (non-Javadoc)
      * 
-     * @see com.everis.gameStore.service.GameService#updateGame(com.everis.gameStore.domain.VO.GamesRequestVO)
+     * @see com.everis.gameStore.service.GameService#updateGame(com.everis.gameStore.domain.VO.GamesRequestVO,
+     * java.lang.Long)
      */
     @Override
-    public void updateGame(GamesRequestVO gamesRequestVO) {
+    public void updateGame(GamesRequestVO gamesRequestVO, Long id) {
         Games games = gameMapper.GamesRequestVoToGames(gamesRequestVO);
         gamesRepository.save(games);
     }

@@ -77,9 +77,9 @@ public class ClientFacadeImpl implements ClientFacade {
      * @see com.everis.gameStore.facade.ClientFacade#updateClient(java.math.BigInteger)
      */
     @Override
-    public void updateClient(ClientsRequestDTO clientsRequestDTO) {
+    public void updateClient(ClientsRequestDTO clientsRequestDTO, Long id) {
         ClientsRequestVO clientsRequestVO = clientMapper.mapperClientsRequestDtoToGamesRequestVO(clientsRequestDTO);
-        clientService.updateClient(clientsRequestVO);
+        clientService.updateClient(clientsRequestVO, id);
     }
 
     /*
