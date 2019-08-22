@@ -5,9 +5,29 @@ spring.datasource.password: root
 
 # Show or not log for each sql query
 spring.jpa.show-sql: true
-## Hibernate Properties
+
+
 # The SQL dialect makes Hibernate generate better SQL for the chosen database
 # spring.jpa.properties.hibernate.dialect : org.hibernate.dialect.MySQL5InnoDBDialect
+
+## Hibernate Properties
 # Hibernate ddl auto (create, create-drop, validate, update)
 spring.jpa.hibernate.ddl-auto : none
 logging.level.org.hibernate.SQL :  DEBUG
+
+## MULTIPART (MultipartProperties)
+# Enable multipart uploads
+spring.servlet.multipart.enabled: true
+
+# Threshold after which files are written to disk.
+spring.servlet.multipart.file-size-threshold: 2KB
+
+# Max file size.
+spring.servlet.multipart.max-file-size: 200MB
+
+# Max Request Size
+spring.servlet.multipart.max-request-size: 215MB
+
+## File Storage Properties
+# All files uploaded through the REST API will be stored in this directory
+file.upload-dir: /ISBAN/repos/gameStrore-backEnd/src/main/resources/images

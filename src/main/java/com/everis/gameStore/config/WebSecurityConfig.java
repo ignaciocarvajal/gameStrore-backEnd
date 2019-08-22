@@ -15,6 +15,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.everis.gameStore.domain.util.Constants;
+
 /**
  * The Class WebSecurityConfig.
  */
@@ -57,7 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .cors().and()
                 .csrf().disable()
-                .authorizeRequests().antMatchers(HttpMethod.POST).permitAll()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, Constants.LOGIN_URL).permitAll()
                 .anyRequest().authenticated().and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()));

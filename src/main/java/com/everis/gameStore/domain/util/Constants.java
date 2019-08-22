@@ -37,4 +37,7 @@ public final class Constants {
 
     /** The Constant ROLES. */
     public static final String ROLES = "roles";
+    
+    /** The Constant LOGIN_URL. */
+    public static final String LOGIN_URL = "/login";
 }
