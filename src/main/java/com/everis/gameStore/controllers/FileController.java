@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.everis.gameStore.domain.DTO.UploadFileResponseDTO;
+import com.everis.gameStore.domain.DTO.ImagesResponseDTO;
 import com.everis.gameStore.facade.FileStorageFacade;
 
 /**
@@ -46,7 +46,7 @@ public class FileController {
      * @return the upload file response
      */
     @PostMapping("/uploadFile")
-    public UploadFileResponseDTO uploadFile(@RequestParam("file") MultipartFile file) {
+    public ImagesResponseDTO uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageFacade.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -59,7 +59,11 @@ public class FileController {
                 .path(fileName)
                 .toUriString();
 
-        return new UploadFileResponseDTO(fileName, fileDownloadUri, fileDeleteUri,
+        
+        fileStorageFacade.saveData(file, fileName, fileDownloadUri, fileDeleteUri,
+                file.getContentType(), file.getSize());
+        
+        return new ImagesResponseDTO(fileName, fileDownloadUri, fileDeleteUri,
                 file.getContentType(), file.getSize());
     }
 
@@ -70,7 +74,7 @@ public class FileController {
      * @return the list
      */
     @PostMapping("/uploadMultipleFiles")
-    public List<UploadFileResponseDTO> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    public List<ImagesResponseDTO> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
                 .stream()
                 .map(file -> uploadFile(file))

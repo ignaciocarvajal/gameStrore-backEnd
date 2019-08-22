@@ -23,6 +23,12 @@ public final class Constants {
     /** The Constant CLIENT_ROLES. */
     public static final String CLIENT_ROLES = "client_rol";
 
+    /** The Constant CLIENT_GAMES. */
+    public static final String CLIENT_GAMES = "client_games";
+
+    /** The Constant GAMES_IMAGES. */
+    public static final String GAMES_IMAGES = "games_images";
+
     /** The Constant CLIENTS. */
     public static final String CLIENTS = "clients";
 
@@ -37,7 +43,10 @@ public final class Constants {
 
     /** The Constant ROLES. */
     public static final String ROLES = "roles";
-    
+
+    /** The Constant IMAGES. */
+    public static final String IMAGES = "images";
+
     /** The Constant LOGIN_URL. */
     public static final String LOGIN_URL = "/login";
 }

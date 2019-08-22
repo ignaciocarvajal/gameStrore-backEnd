@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UploadFileResponseDTO {
+public class ImagesResponseDTO {
 
     /** The file name. */
     private String fileName;
@@ -29,5 +29,5 @@ public class UploadFileResponseDTO {
     private String fileType;
 
     /** The size. */
-    private long size;
+    private Long size;
 }

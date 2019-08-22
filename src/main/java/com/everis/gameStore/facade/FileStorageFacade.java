@@ -30,4 +30,17 @@ public interface FileStorageFacade {
      * @param fileName the file name
      */
     void deleteFile(String fileName);
+
+    /**
+     * Save data.
+     *
+     * @param file the file
+     * @param fileName the file name
+     * @param fileDownloadUri the file download uri
+     * @param fileDeleteUri the file delete uri
+     * @param contentType the content type
+     * @param size the size
+     */
+    void saveData(MultipartFile file, String fileName, String fileDownloadUri, String fileDeleteUri, String contentType,
+            long size);
 }
