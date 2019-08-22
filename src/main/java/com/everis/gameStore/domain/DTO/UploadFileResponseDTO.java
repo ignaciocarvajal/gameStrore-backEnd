@@ -18,13 +18,16 @@ public class UploadFileResponseDTO {
 
     /** The file name. */
     private String fileName;
-    
+
     /** The file download uri. */
     private String fileDownloadUri;
-    
+
+    /** The file delete uri. */
+    private String fileDeleteUri;
+
     /** The file type. */
     private String fileType;
-    
+
     /** The size. */
     private long size;
 }

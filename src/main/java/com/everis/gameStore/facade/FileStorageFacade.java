@@ -23,4 +23,11 @@ public interface FileStorageFacade {
      * @return the resource
      */
     Resource loadFileAsResource(String fileName);
+
+    /**
+     * Delete file.
+     *
+     * @param fileName the file name
+     */
+    void deleteFile(String fileName);
 }

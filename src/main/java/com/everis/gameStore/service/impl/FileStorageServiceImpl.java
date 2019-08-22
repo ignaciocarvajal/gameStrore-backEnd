@@ -88,4 +88,18 @@ public class FileStorageServiceImpl implements FileStorageService {
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.everis.gameStore.service.FileStorageService#deleteFile(java.lang.String)
+     */
+    @Override
+    public void deleteFile(String fileName) {
+        try {
+            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+            Files.deleteIfExists(Paths.get(filePath.toUri()));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

@@ -14,6 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +38,7 @@ public class FileController {
     /** The file storage facade. */
     @Autowired
     private FileStorageFacade fileStorageFacade;
-    
+
     /**
      * Upload file.
      *
@@ -53,7 +54,12 @@ public class FileController {
                 .path(fileName)
                 .toUriString();
 
-        return new UploadFileResponseDTO(fileName, fileDownloadUri,
+        String fileDeleteUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/deleteFile/")
+                .path(fileName)
+                .toUriString();
+
+        return new UploadFileResponseDTO(fileName, fileDownloadUri, fileDeleteUri,
                 file.getContentType(), file.getSize());
     }
 
@@ -97,5 +103,16 @@ public class FileController {
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
+    }
+
+    /**
+     * Delete file.
+     *
+     * @param fileName the file name
+     * @param request the request
+     */
+    @DeleteMapping("/deleteFile/{fileName:.+}")
+    public void deleteFile(@PathVariable String fileName, HttpServletRequest request) {
+        fileStorageFacade.deleteFile(fileName);
     }
 }

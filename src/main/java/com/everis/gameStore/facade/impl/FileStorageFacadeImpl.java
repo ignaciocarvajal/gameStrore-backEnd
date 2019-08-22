@@ -37,4 +37,14 @@ public class FileStorageFacadeImpl implements FileStorageFacade {
     public Resource loadFileAsResource(String fileName) {
         return fileStorageService.loadFileAsResource(fileName);
     }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.everis.gameStore.facade.FileStorageFacade#deleteFile(java.lang.String)
+     */
+    @Override
+    public void deleteFile(String fileName) {
+        fileStorageService.deleteFile(fileName);
+    }
 }
