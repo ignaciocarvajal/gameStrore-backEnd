@@ -1,11 +1,11 @@
 package com.everis.gameStore.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.everis.gameStore.domain.DTO.GamesResponseDTO;
 import com.everis.gameStore.domain.VO.GamesRequestVO;
 import com.everis.gameStore.domain.VO.GamesResponseVO;
 import com.everis.gameStore.domain.model.Games;
@@ -44,9 +44,15 @@ public class GameServiceImpl implements GameService {
      * @see com.everis.gameStore.service.GameService#getAllGames()
      */
     @Override
-    public List<GamesResponseDTO> getAllGames() {
-        // List<GamesResponseDTO> listGamesResponseDTO = gamesRepository.getAllGames();
-        return null;
+    public List<GamesResponseVO> getAllGames() {
+         List<GamesResponseVO> listGamesResponseVO = new ArrayList<>();
+         GamesResponseVO gamesResponseVO = new GamesResponseVO();
+         List<Games> listGames = (List<Games>) gamesRepository.findAll();
+         for(Games games : listGames) {
+             gamesResponseVO = gameMapper.GamesToListGamesResponseVO(games);
+             listGamesResponseVO.add(gamesResponseVO);
+         }
+        return listGamesResponseVO;
     }
 
     /*
@@ -55,9 +61,11 @@ public class GameServiceImpl implements GameService {
      * @see com.everis.gameStore.service.GameService#getGameById(java.math.BigInteger)
      */
     @Override
-    public List<GamesResponseVO> getGameById(Long idGames) {
-        // List<GamesResponseVO> listGamesResponseVO = gamesRepository.getGameById(idGames);
-        return null;
+    public GamesResponseVO getGameById(Long idGames) {
+        GamesResponseVO gamesResponseVO = new GamesResponseVO();
+        Games game = gamesRepository.findByIdGames(idGames);
+        gamesResponseVO = gameMapper.GamesToGamesResponseVO(game);
+        return gamesResponseVO;
     }
 
     /*

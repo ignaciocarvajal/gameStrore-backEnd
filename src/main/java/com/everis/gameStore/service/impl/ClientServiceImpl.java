@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
 import com.everis.gameStore.domain.VO.ClientsResponseVO;
+import com.everis.gameStore.domain.VO.RolesResponseVO;
 import com.everis.gameStore.domain.model.Clients;
+import com.everis.gameStore.domain.model.Roles;
 import com.everis.gameStore.mapper.ClientMapper;
 import com.everis.gameStore.repository.ClientsRepository;
+import com.everis.gameStore.repository.RolesRespository;
 import com.everis.gameStore.service.ClientService;
 
 /**
@@ -23,6 +26,10 @@ public class ClientServiceImpl implements ClientService {
     /** The clients repository. */
     @Autowired
     private ClientsRepository clientsRepository;
+
+    /** The roles respository. */
+    @Autowired
+    private RolesRespository rolesRespository;
 
     /** The client mapper. */
     @Autowired
@@ -93,5 +100,17 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void deleteClient(Long idClient) {
         clientsRepository.deleteById(idClient);
+    }
+
+    @Override
+    public List<RolesResponseVO> getAllRoles() {
+        List<RolesResponseVO> listRolesResponseVO = new ArrayList<>();
+        RolesResponseVO rolesResponseVO = new RolesResponseVO();
+        List<Roles> listRoles = (List<Roles>) rolesRespository.findAll();
+        for (Roles roles : listRoles) {
+            rolesResponseVO = clientMapper.RolesResponseVoToRoles(roles);
+            listRolesResponseVO.add(rolesResponseVO);
+        }
+        return listRolesResponseVO;
     }
 }

@@ -19,6 +19,6 @@ public class RolesResponseDTO {
     /** The id roles. */
     private Long idRoles;
 
-    /** The descripcion. */
-    private String descripcion;
+    /** The description. */
+    private String description;
 }

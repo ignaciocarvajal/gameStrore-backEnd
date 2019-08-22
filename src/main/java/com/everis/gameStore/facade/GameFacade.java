@@ -2,7 +2,6 @@ package com.everis.gameStore.facade;
 
 import java.util.List;
 
-import com.everis.gameStore.domain.DTO.GamesListResponseDTO;
 import com.everis.gameStore.domain.DTO.GamesRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesResponseDTO;
 
@@ -23,7 +22,7 @@ public interface GameFacade {
      *
      * @return the all games
      */
-    GamesListResponseDTO getAllGames();
+    List<GamesResponseDTO> getAllGames();
 
     /**
      * Gets the game by id.
@@ -31,7 +30,7 @@ public interface GameFacade {
      * @param idGames the id games
      * @return the game by id
      */
-    List<GamesResponseDTO> getGameById(Long idGames);
+    GamesResponseDTO getGameById(Long idGames);
 
     /**
      * Update game.
