@@ -1,13 +1,17 @@
 package com.everis.gameStore.domain.model;
 
 import java.io.Serializable;
-import java.sql.Blob;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.everis.gameStore.domain.util.Constants;
@@ -35,15 +39,22 @@ public class Games implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idGames;
 
     /** The game name. */
     @Column(name = "game_name")
     private String gameName;
 
     /** The image. */
-    @Column(name = "image")
-    private Blob image;
+    @JoinTable(name = "games_images",
+            joinColumns = @JoinColumn(
+                    name = "id_game",
+                    referencedColumnName = "Id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "id_images",
+                    referencedColumnName = "Id"))
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Images> image;
 
     /** The activation code. */
     @Column(name = "activation_code")
@@ -56,8 +67,4 @@ public class Games implements Serializable {
     /** The stock. */
     @Column(name = "stock")
     private Integer stock;
-
-    /** The id clients. */
-    @Column(name = "id_clients")
-    private Long idClients;
 }

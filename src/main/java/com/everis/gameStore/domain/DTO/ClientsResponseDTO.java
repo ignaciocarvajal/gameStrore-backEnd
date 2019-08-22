@@ -1,8 +1,10 @@
 package com.everis.gameStore.domain.DTO;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
+import com.everis.gameStore.domain.model.Games;
 import com.everis.gameStore.domain.model.Roles;
 
 import lombok.AllArgsConstructor;
@@ -34,7 +36,7 @@ public class ClientsResponseDTO {
     private String password;
 
     /** The list acquired game. */
-    private String listAcquiredGame;
+    private List<Games> listAcquiredGames;
 
     /** The date acquired game. */
     private Timestamp dateAcquiredGame;

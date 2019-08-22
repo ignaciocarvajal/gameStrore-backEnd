@@ -1,6 +1,6 @@
 package com.everis.gameStore.domain.DTO;
 
-import java.sql.Blob;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,24 +18,21 @@ import lombok.Setter;
 @Builder
 public class GamesResponseDTO {
 
-	/** The id games. */
-	private Long idGames;
+    /** The id games. */
+    private Long idGames;
 
-	/** The game name. */
-	private String gameName;
+    /** The game name. */
+    private String gameName;
 
-	/** The image. */
-	private Blob image;
+    /** The image. */
+    private List<ImagesResponseDTO> image;
 
-	/** The activation code. */
-	private String activationCode;
+    /** The activation code. */
+    private String activationCode;
 
-	/** The value. */
-	private Integer value;
+    /** The value. */
+    private Integer value;
 
-	/** The stock. */
-	private Integer stock;
-
-	/** The id clients. */
-	private Long idClients;
+    /** The stock. */
+    private Integer stock;
 }
