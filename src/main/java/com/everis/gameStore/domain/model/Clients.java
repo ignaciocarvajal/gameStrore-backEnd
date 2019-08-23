@@ -3,6 +3,7 @@ package com.everis.gameStore.domain.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.everis.gameStore.domain.util.Constants;
@@ -56,8 +58,15 @@ public class Clients implements Serializable {
     private String password;
 
     /** The list acquired game. */
-    @Column(name = "list_acq_games")
-    private String listAcquiredGame;
+    @JoinTable(name = "client_games",
+            joinColumns = @JoinColumn(
+                    name = "id_client",
+                    referencedColumnName = "Id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "id_game",
+                    referencedColumnName = "Id"))
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Games> listAcquiredGames;
 
     /** The date acquired game. */
     @Column(name = "date_acq_games")

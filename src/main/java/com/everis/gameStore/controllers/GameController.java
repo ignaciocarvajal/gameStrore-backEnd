@@ -9,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.gameStore.domain.DTO.GamesRequestDTO;
@@ -50,7 +54,7 @@ public class GameController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/createGame", method = RequestMethod.POST, produces = "application/json")
+    @PostMapping(value = "/create")
     public void createGame(@RequestBody(required = true) GamesRequestDTO gamesRequestDTO) throws ServiceException {
         try {
             gameFacade.createGame(gamesRequestDTO);
@@ -71,7 +75,7 @@ public class GameController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/getAllGames", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/")
     public ResponseEntity<List<GamesResponseDTO>> getAllGames() throws ServiceException {
         try {
             return new ResponseEntity<List<GamesResponseDTO>>(gameFacade.getAllGames(), HttpStatus.OK);
@@ -94,11 +98,11 @@ public class GameController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/getGameById{idGames}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<GamesResponseDTO> getGameById(@RequestParam Long idGames)
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<GamesResponseDTO> getGameById(@PathVariable(value = "id") Long id)
             throws ServiceException {
         try {
-            return new ResponseEntity<GamesResponseDTO>(gameFacade.getGameById(idGames), HttpStatus.OK);
+            return new ResponseEntity<GamesResponseDTO>(gameFacade.getGameById(id), HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -118,11 +122,12 @@ public class GameController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/updateGame", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<Void> updateGame(@RequestBody GamesRequestDTO gamesRequestDTO)
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<Void> updateGame(@RequestBody GamesRequestDTO gamesRequestDTO,
+            @PathVariable(value = "id") Long id)
             throws ServiceException {
         try {
-            gameFacade.updateGame(gamesRequestDTO);
+            gameFacade.updateGame(gamesRequestDTO, id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -143,11 +148,11 @@ public class GameController {
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/deleteGame", method = RequestMethod.DELETE, produces = "application/json")
-    public ResponseEntity<Void> deleteGame(@RequestParam Long idGames)
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Void> deleteGame(@PathVariable(value = "id") Long id)
             throws ServiceException {
         try {
-            gameFacade.deleteGame(idGames);
+            gameFacade.deleteGame(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);

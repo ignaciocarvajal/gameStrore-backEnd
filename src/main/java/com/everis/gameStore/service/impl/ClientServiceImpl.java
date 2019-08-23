@@ -1,6 +1,8 @@
 package com.everis.gameStore.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,10 +86,16 @@ public class ClientServiceImpl implements ClientService {
      * @see com.everis.gameStore.service.ClientService#updateClient(com.everis.gameStore.domain.VO.ClientsRequestVO)
      */
     @Override
-    public void updateClient(ClientsRequestVO clientsRequestVO) {
-        Clients clients = clientsRepository.findByPassword(clientsRequestVO.getPassword());
+    public void updateClient(ClientsRequestVO clientsRequestVO, Long id) {
+        Clients clients = clientsRepository.findByIdClient(id);
+        
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
         clientsRequestVO.setPassword(bCryptPasswordEncoder.encode(clientsRequestVO.getPassword()));
+
+        Date date = new Date();
+        Timestamp ts = new Timestamp(date.getTime());
+        clientsRequestVO.setDateAcquiredGame(ts);
+
         clients = clientMapper.mapperClientsToClientsRequestVO(clientsRequestVO);
         clientsRepository.save(clients);
     }
@@ -102,6 +110,11 @@ public class ClientServiceImpl implements ClientService {
         clientsRepository.deleteById(idClient);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.everis.gameStore.service.ClientService#getAllRoles()
+     */
     @Override
     public List<RolesResponseVO> getAllRoles() {
         List<RolesResponseVO> listRolesResponseVO = new ArrayList<>();

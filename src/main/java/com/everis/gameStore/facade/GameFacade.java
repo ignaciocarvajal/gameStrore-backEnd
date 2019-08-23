@@ -37,7 +37,7 @@ public interface GameFacade {
      *
      * @param gamesRequestVO the games request VO
      */
-    void updateGame(GamesRequestDTO gamesRequestVO);
+    void updateGame(GamesRequestDTO gamesRequestVO, Long id);
 
     /**
      * Delete game.

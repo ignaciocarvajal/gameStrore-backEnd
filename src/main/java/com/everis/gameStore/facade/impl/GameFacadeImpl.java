@@ -48,7 +48,7 @@ public class GameFacadeImpl implements GameFacade {
     public List<GamesResponseDTO> getAllGames() {
         List<GamesResponseDTO> listGamesResponseDTO = new ArrayList<>();
         GamesResponseDTO gamesListResponseDTO = new GamesResponseDTO();
-        
+
         List<GamesResponseVO> listGamesResponseVO = gameService.getAllGames();
         for (GamesResponseVO games : listGamesResponseVO) {
             gamesListResponseDTO = gameMapper.GamesResponseVoToGamesResponseDTO(games);
@@ -73,12 +73,13 @@ public class GameFacadeImpl implements GameFacade {
     /*
      * (non-Javadoc)
      * 
-     * @see com.everis.gameStore.facade.GameFacade#updateGame(com.everis.gameStore.domain.VO.GamesModifyRequestVO)
+     * @see com.everis.gameStore.facade.GameFacade#updateGame(com.everis.gameStore.domain.DTO.GamesRequestDTO,
+     * java.lang.Long)
      */
     @Override
-    public void updateGame(GamesRequestDTO gamesRequestDTO) {
+    public void updateGame(GamesRequestDTO gamesRequestDTO, Long id) {
         GamesRequestVO gamesRequestVO = gameMapper.GamesRequestDtoToGamesRequestVO(gamesRequestDTO);
-        gameService.updateGame(gamesRequestVO);
+        gameService.updateGame(gamesRequestVO, id);
     }
 
     /*

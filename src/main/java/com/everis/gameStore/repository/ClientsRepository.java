@@ -26,12 +26,4 @@ public interface ClientsRepository extends PagingAndSortingRepository<Clients, L
      * @return the clients
      */
     Clients findByIdClient(Long idClient);
-
-    /**
-     * Find by password.
-     *
-     * @param password the password
-     * @return the clients
-     */
-    Clients findByPassword(String password);
 }

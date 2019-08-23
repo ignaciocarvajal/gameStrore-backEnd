@@ -14,17 +14,20 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UploadFileResponseDTO {
+public class ImagesResponseDTO {
 
     /** The file name. */
     private String fileName;
-    
+
     /** The file download uri. */
     private String fileDownloadUri;
-    
+
+    /** The file delete uri. */
+    private String fileDeleteUri;
+
     /** The file type. */
     private String fileType;
-    
+
     /** The size. */
-    private long size;
+    private Long size;
 }

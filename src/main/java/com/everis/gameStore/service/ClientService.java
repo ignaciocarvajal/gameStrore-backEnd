@@ -41,7 +41,7 @@ public interface ClientService {
      *
      * @param ClientsRequestVO the clients request VO
      */
-    void updateClient(ClientsRequestVO ClientsRequestVO);
+    void updateClient(ClientsRequestVO ClientsRequestVO, Long id);
 
     /**
      * Delete client.

@@ -1,6 +1,6 @@
 package com.everis.gameStore.domain.DTO;
 
-import java.sql.Blob;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +22,10 @@ public class GamesRequestDTO {
 	private String gameName;
 
 	/** The image. */
-	private Blob image;
+	private List<ImagesResponseDTO> image;
+	
+	/** The activation code. */
+	private String activationCode;
 
 	/** The value. */
 	private Integer value;

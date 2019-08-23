@@ -15,8 +15,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.everis.gameStore.config.FileStorageProperties;
+import com.everis.gameStore.domain.VO.ImageResponseVO;
 import com.everis.gameStore.domain.exceptions.FileStorageException;
 import com.everis.gameStore.domain.exceptions.MyFileNotFoundException;
+import com.everis.gameStore.domain.model.Images;
+import com.everis.gameStore.mapper.FileMapper;
+import com.everis.gameStore.repository.ImagesRepository;
 import com.everis.gameStore.service.FileStorageService;
 
 /**
@@ -27,6 +31,14 @@ public class FileStorageServiceImpl implements FileStorageService {
 
     /** The file storage location. */
     private Path fileStorageLocation;
+
+    /** The file mapper. */
+    @Autowired
+    private FileMapper fileMapper;
+
+    /** The images repository. */
+    @Autowired
+    private ImagesRepository imagesRepository;
 
     /**
      * File storage service.
@@ -88,4 +100,29 @@ public class FileStorageServiceImpl implements FileStorageService {
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.everis.gameStore.service.FileStorageService#deleteFile(java.lang.String)
+     */
+    @Override
+    public void deleteFile(String fileName) {
+        try {
+            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+            Files.deleteIfExists(Paths.get(filePath.toUri()));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.everis.gameStore.service.FileStorageService#saveData(com.everis.gameStore.domain.VO.ImageResponseVO)
+     */
+    @Override
+    public void saveData(ImageResponseVO imageResponseVO) {
+        Images images = fileMapper.ImageResponseVoToImages(imageResponseVO);
+        imagesRepository.save(images);
+    }
 }
