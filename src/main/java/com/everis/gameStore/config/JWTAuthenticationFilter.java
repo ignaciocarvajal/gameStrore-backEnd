@@ -83,7 +83,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String token = Jwts.builder()
                 .setClaims(claims)
-                .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 minuto => 60.000 milisec
+                .setExpiration(new Date(System.currentTimeMillis() + Constants.EXP_TOKEN)) 
                 .signWith(SignatureAlgorithm.HS512, Constants.SECRET_KEY)
                 .compact();
         res.addHeader(Constants.AUTHORIZATION, Constants.BEARER + Constants.WHITE_SPACE + token);
