@@ -5,6 +5,21 @@ package com.everis.gameStore.domain.util;
  */
 public final class Constants {
 
+    /** The Constant EXP_TOKEN. */
+    public static final Integer EXP_TOKEN = 3600000;
+
+    /** The Constant LOGIN_URL. */
+    public static final String LOGIN_URL = "/login";
+
+    /** The Constant CREATE_CLIENT. */
+    public static final String CREATE_CLIENT_URL = "/clients/create";
+
+    /** The Constant LIST_GAMES_URL. */
+    public static final String LIST_GAMES_URL = "/games/";
+
+    /** The Constant GAME_BY_ID_URL. */
+    public static final String GAME_BY_ID_URL = "/games/{id}";
+
     /** The Constant BEARER. */
     public static final String BEARER = "Bearer";
 
@@ -46,7 +61,4 @@ public final class Constants {
 
     /** The Constant IMAGES. */
     public static final String IMAGES = "images";
-
-    /** The Constant LOGIN_URL. */
-    public static final String LOGIN_URL = "/login";
 }

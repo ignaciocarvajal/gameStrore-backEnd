@@ -2,6 +2,8 @@ package com.everis.gameStore.domain.VO;
 
 import java.util.List;
 
+import com.everis.gameStore.domain.model.Images;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +24,7 @@ public class GamesRequestVO {
 	private String gameName;
 
 	/** The image. */
-	private List<ImageResponseVO> image;
+	private List<Images> image;
 	
 	/** The activation code. */
 	private String activationCode;
