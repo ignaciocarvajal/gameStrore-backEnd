@@ -80,5 +80,4 @@ public interface ClientMapper {
      * @return the roles response VO
      */
     RolesResponseVO RolesResponseVoToRoles(Roles roles);
-
 }

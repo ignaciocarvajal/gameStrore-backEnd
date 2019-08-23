@@ -5,6 +5,7 @@ import java.util.List;
 import com.everis.gameStore.domain.DTO.ClientsRequestDTO;
 import com.everis.gameStore.domain.DTO.ClientsResponseDTO;
 import com.everis.gameStore.domain.DTO.RolesResponseDTO;
+import com.everis.gameStore.domain.exceptions.ClientNotFoundException;
 
 /**
  * The Interface ClientFacade.
@@ -16,7 +17,7 @@ public interface ClientFacade {
      *
      * @param clientsRequestDTO the clients request DTO
      */
-    void createClient(ClientsRequestDTO clientsRequestDTO);
+    ClientsResponseDTO createClient(ClientsRequestDTO clientsRequestDTO);
 
     /**
      * Gets the all clients.
@@ -30,16 +31,18 @@ public interface ClientFacade {
      *
      * @param idClient the id client
      * @return the client by id
+     * @throws ClientNotFoundException 
      */
-    ClientsResponseDTO getClientById(Long idClient);
+    ClientsResponseDTO getClientById(Long idClient) throws ClientNotFoundException;
 
     /**
      * Update client.
      *
      * @param ClientsRequestDTO the clients request DTO
      * @param id the id
+     * @throws ClientNotFoundException 
      */
-    void updateClient(ClientsRequestDTO ClientsRequestDTO, Long id);
+    ClientsResponseDTO updateClient(ClientsRequestDTO ClientsRequestDTO, Long id) throws ClientNotFoundException;
 
     /**
      * Delete client.

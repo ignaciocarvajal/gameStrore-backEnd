@@ -10,6 +10,7 @@ import com.everis.gameStore.domain.DTO.GamesRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesResponseDTO;
 import com.everis.gameStore.domain.VO.GamesRequestVO;
 import com.everis.gameStore.domain.VO.GamesResponseVO;
+import com.everis.gameStore.domain.exceptions.GameNotFoundException;
 import com.everis.gameStore.facade.GameFacade;
 import com.everis.gameStore.mapper.GameMapper;
 import com.everis.gameStore.service.GameService;
@@ -34,9 +35,10 @@ public class GameFacadeImpl implements GameFacade {
      * @see com.everis.gameStore.facade.GameFacade#createGame(com.everis.gameStore.domain .DTO.GamesRequestDTO)
      */
     @Override
-    public void createGame(GamesRequestDTO gamesRequestDTO) {
+    public GamesResponseDTO createGame(GamesRequestDTO gamesRequestDTO) {
         GamesRequestVO gamesRequestVO = gameMapper.GamesRequestDtoToGamesRequestVO(gamesRequestDTO);
-        gameService.createGame(gamesRequestVO);
+        GamesResponseVO gamesResponseVO = gameService.createGame(gamesRequestVO);
+        return gameMapper.GamesResponseVoToGamesResponseDTO(gamesResponseVO);
     }
 
     /*
@@ -63,7 +65,7 @@ public class GameFacadeImpl implements GameFacade {
      * @see com.everis.gameStore.facade.GameFacade#getGameById(java.math.BigInteger)
      */
     @Override
-    public GamesResponseDTO getGameById(Long idGames) {
+    public GamesResponseDTO getGameById(Long idGames) throws GameNotFoundException {
         GamesResponseDTO gamesResponseDTO = new GamesResponseDTO();
         GamesResponseVO gamesResponseVO = gameService.getGameById(idGames);
         gamesResponseDTO = gameMapper.GamesResponseVoToGamesResponseDTO(gamesResponseVO);
@@ -77,9 +79,10 @@ public class GameFacadeImpl implements GameFacade {
      * java.lang.Long)
      */
     @Override
-    public void updateGame(GamesRequestDTO gamesRequestDTO, Long id) {
+    public GamesResponseDTO updateGame(GamesRequestDTO gamesRequestDTO, Long id) throws GameNotFoundException {
         GamesRequestVO gamesRequestVO = gameMapper.GamesRequestDtoToGamesRequestVO(gamesRequestDTO);
-        gameService.updateGame(gamesRequestVO, id);
+        GamesResponseVO gamesResponseVO = gameService.updateGame(gamesRequestVO, id);
+        return gameMapper.GamesResponseVoToGamesResponseDTO(gamesResponseVO);
     }
 
     /*

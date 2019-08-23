@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.everis.gameStore.domain.VO.GamesRequestVO;
 import com.everis.gameStore.domain.VO.GamesResponseVO;
+import com.everis.gameStore.domain.exceptions.GameNotFoundException;
 import com.everis.gameStore.domain.model.Games;
 import com.everis.gameStore.mapper.GameMapper;
+import com.everis.gameStore.mapper.UpdateMapper;
 import com.everis.gameStore.repository.GamesRepository;
 import com.everis.gameStore.service.GameService;
 
@@ -33,9 +36,12 @@ public class GameServiceImpl implements GameService {
      * @see com.everis.gameStore.service.GameService#createGame(com.everis.gameStore.domain.VO.GamesRequestVO)
      */
     @Override
-    public void createGame(GamesRequestVO gamesRequestVO) {
+    public GamesResponseVO createGame(GamesRequestVO gamesRequestVO) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
         Games games = gameMapper.GamesRequestVoToGames(gamesRequestVO);
-        gamesRepository.save(games);
+        games.setGameName(bCryptPasswordEncoder.encode(gamesRequestVO.getGameName()));
+        games = gamesRepository.save(games);
+        return gameMapper.GamesToGamesResponseVO(games);
     }
 
     /*
@@ -61,9 +67,9 @@ public class GameServiceImpl implements GameService {
      * @see com.everis.gameStore.service.GameService#getGameById(java.math.BigInteger)
      */
     @Override
-    public GamesResponseVO getGameById(Long idGames) {
+    public GamesResponseVO getGameById(Long idGames) throws GameNotFoundException {
         GamesResponseVO gamesResponseVO = new GamesResponseVO();
-        Games game = gamesRepository.findByIdGames(idGames);
+        Games game = gamesRepository.findById(idGames).orElseThrow(() -> new GameNotFoundException(idGames));
         gamesResponseVO = gameMapper.GamesToGamesResponseVO(game);
         return gamesResponseVO;
     }
@@ -75,9 +81,15 @@ public class GameServiceImpl implements GameService {
      * java.lang.Long)
      */
     @Override
-    public void updateGame(GamesRequestVO gamesRequestVO, Long id) {
-        Games games = gameMapper.GamesRequestVoToGames(gamesRequestVO);
-        gamesRepository.save(games);
+    public GamesResponseVO updateGame(GamesRequestVO gamesRequestVO, Long id) throws GameNotFoundException {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+        Games games = gamesRepository.findById(id).orElseThrow(() -> new GameNotFoundException(id));
+        games.setGameName(bCryptPasswordEncoder.encode(gamesRequestVO.getGameName()));
+        games = UpdateMapper.mapperGamesToGamesRequestVO(gamesRequestVO, games);
+        if (null != games) {
+            games = gamesRepository.save(games);
+        }
+        return gameMapper.GamesToGamesResponseVO(games);
     }
 
     /*
