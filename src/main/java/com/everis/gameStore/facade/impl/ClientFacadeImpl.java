@@ -12,6 +12,7 @@ import com.everis.gameStore.domain.DTO.RolesResponseDTO;
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
 import com.everis.gameStore.domain.VO.ClientsResponseVO;
 import com.everis.gameStore.domain.VO.RolesResponseVO;
+import com.everis.gameStore.domain.exceptions.ClientNotFoundException;
 import com.everis.gameStore.facade.ClientFacade;
 import com.everis.gameStore.mapper.ClientMapper;
 import com.everis.gameStore.service.ClientService;
@@ -36,9 +37,10 @@ public class ClientFacadeImpl implements ClientFacade {
      * @see com.everis.gameStore.facade.ClientFacade#createClient(com.everis.gameStore. domain.DTO.ClientsRequestDTO)
      */
     @Override
-    public void createClient(ClientsRequestDTO clientsRequestDTO) {
+    public ClientsResponseDTO createClient(ClientsRequestDTO clientsRequestDTO) {
         ClientsRequestVO clientsRequestVO = clientMapper.mapperClientsRequestDtoToGamesRequestVO(clientsRequestDTO);
-        clientService.createClient(clientsRequestVO);
+        ClientsResponseVO clientsResponseVO = clientService.createClient(clientsRequestVO);
+        return clientMapper.ClientsResponseVoToClientsResponseDTO(clientsResponseVO);
     }
 
     /*
@@ -64,7 +66,7 @@ public class ClientFacadeImpl implements ClientFacade {
      * @see com.everis.gameStore.facade.ClientFacade#getClientById(java.math.BigInteger)
      */
     @Override
-    public ClientsResponseDTO getClientById(Long idClient) {
+    public ClientsResponseDTO getClientById(Long idClient) throws ClientNotFoundException {
         ClientsResponseDTO clientsResponseDTO = new ClientsResponseDTO();
         ClientsResponseVO clientsResponseVO = clientService.getClientById(idClient);
         clientsResponseDTO = clientMapper.ClientsResponseVoToClientsResponseDTO(clientsResponseVO);
@@ -77,9 +79,10 @@ public class ClientFacadeImpl implements ClientFacade {
      * @see com.everis.gameStore.facade.ClientFacade#updateClient(java.math.BigInteger)
      */
     @Override
-    public void updateClient(ClientsRequestDTO clientsRequestDTO, Long id) {
+    public ClientsResponseDTO updateClient(ClientsRequestDTO clientsRequestDTO, Long id) throws ClientNotFoundException {
         ClientsRequestVO clientsRequestVO = clientMapper.mapperClientsRequestDtoToGamesRequestVO(clientsRequestDTO);
-        clientService.updateClient(clientsRequestVO, id);
+        ClientsResponseVO clientsResponseVO = clientService.updateClient(clientsRequestVO, id);
+        return clientMapper.ClientsResponseVoToClientsResponseDTO(clientsResponseVO);
     }
 
     /*

@@ -55,12 +55,14 @@ public class ClientController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @PostMapping(value = "/create")
-    public void createClient(@RequestBody(required = true) ClientsRequestDTO clientsRequestDTO)
+    public ResponseEntity<ClientsResponseDTO> createClient(
+            @RequestBody(required = true) ClientsRequestDTO clientsRequestDTO)
             throws ServiceException {
         try {
-            clientFacade.createClient(clientsRequestDTO);
+            return new ResponseEntity<ClientsResponseDTO>(clientFacade.createClient(clientsRequestDTO), HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -124,12 +126,12 @@ public class ClientController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<Void> updateClient(@RequestBody ClientsRequestDTO clientsModifyRequestDTO,
+    public ResponseEntity<ClientsResponseDTO> updateClient(@RequestBody ClientsRequestDTO clientsModifyRequestDTO,
             @PathVariable(value = "id") Long id)
             throws ServiceException {
         try {
-            clientFacade.updateClient(clientsModifyRequestDTO, id);
-            return new ResponseEntity<Void>(HttpStatus.OK);
+            return new ResponseEntity<ClientsResponseDTO>(clientFacade.updateClient(clientsModifyRequestDTO, id),
+                    HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

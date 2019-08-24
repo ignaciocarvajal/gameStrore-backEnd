@@ -32,8 +32,8 @@ public class Images implements Serializable {
 
     /** The id image. */
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idImage;
 
     /** The file name. */

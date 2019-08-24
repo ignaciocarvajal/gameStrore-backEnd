@@ -55,11 +55,13 @@ public class GameController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @PostMapping(value = "/create")
-    public void createGame(@RequestBody(required = true) GamesRequestDTO gamesRequestDTO) throws ServiceException {
+    public ResponseEntity<GamesResponseDTO> createGame(@RequestBody(required = true) GamesRequestDTO gamesRequestDTO)
+            throws ServiceException {
         try {
-            gameFacade.createGame(gamesRequestDTO);
+            return new ResponseEntity<GamesResponseDTO>(gameFacade.createGame(gamesRequestDTO), HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -123,12 +125,11 @@ public class GameController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<Void> updateGame(@RequestBody GamesRequestDTO gamesRequestDTO,
+    public ResponseEntity<GamesResponseDTO> updateGame(@RequestBody GamesRequestDTO gamesRequestDTO,
             @PathVariable(value = "id") Long id)
             throws ServiceException {
         try {
-            gameFacade.updateGame(gamesRequestDTO, id);
-            return new ResponseEntity<Void>(HttpStatus.OK);
+            return new ResponseEntity<GamesResponseDTO>(gameFacade.updateGame(gamesRequestDTO, id), HttpStatus.OK);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.everis.gameStore.domain.DTO.GamesRequestDTO;
 import com.everis.gameStore.domain.DTO.GamesResponseDTO;
+import com.everis.gameStore.domain.exceptions.GameNotFoundException;
 
 /**
  * The Interface GameFacade.
@@ -15,7 +16,7 @@ public interface GameFacade {
      *
      * @param gamesRequestDTO the games request DTO
      */
-    void createGame(GamesRequestDTO gamesRequestDTO);
+    GamesResponseDTO createGame(GamesRequestDTO gamesRequestDTO);
 
     /**
      * Gets the all games.
@@ -29,15 +30,17 @@ public interface GameFacade {
      *
      * @param idGames the id games
      * @return the game by id
+     * @throws GameNotFoundException 
      */
-    GamesResponseDTO getGameById(Long idGames);
+    GamesResponseDTO getGameById(Long idGames) throws GameNotFoundException;
 
     /**
      * Update game.
      *
      * @param gamesRequestVO the games request VO
+     * @throws GameNotFoundException 
      */
-    void updateGame(GamesRequestDTO gamesRequestVO, Long id);
+    GamesResponseDTO updateGame(GamesRequestDTO gamesRequestVO, Long id) throws GameNotFoundException;
 
     /**
      * Delete game.

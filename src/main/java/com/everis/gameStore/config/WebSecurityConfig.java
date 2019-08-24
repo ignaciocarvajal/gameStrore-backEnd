@@ -56,12 +56,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          * 5. Se indica que el resto de URLs esten securizadas
          */
         http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .cors().and()
-                .csrf().disable()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .cors()
+                .and()
+                .csrf()
+                .disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, Constants.LOGIN_URL).permitAll()
-                .anyRequest().authenticated().and()
+                .antMatchers(HttpMethod.POST, Constants.CREATE_CLIENT_URL).permitAll()
+                .antMatchers(HttpMethod.GET, Constants.LIST_GAMES_URL).permitAll()
+                .antMatchers(HttpMethod.GET, Constants.GAME_BY_ID_URL).permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()));
     }

@@ -2,6 +2,8 @@ package com.everis.gameStore.domain.DTO;
 
 import java.util.List;
 
+import com.everis.gameStore.domain.model.Images;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +27,7 @@ public class GamesResponseDTO {
     private String gameName;
 
     /** The image. */
-    private List<ImagesResponseDTO> image;
+    private List<Images> image;
 
     /** The activation code. */
     private String activationCode;

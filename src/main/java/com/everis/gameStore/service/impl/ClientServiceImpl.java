@@ -1,8 +1,6 @@
 package com.everis.gameStore.service.impl;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,11 @@ import org.springframework.stereotype.Service;
 import com.everis.gameStore.domain.VO.ClientsRequestVO;
 import com.everis.gameStore.domain.VO.ClientsResponseVO;
 import com.everis.gameStore.domain.VO.RolesResponseVO;
+import com.everis.gameStore.domain.exceptions.ClientNotFoundException;
 import com.everis.gameStore.domain.model.Clients;
 import com.everis.gameStore.domain.model.Roles;
 import com.everis.gameStore.mapper.ClientMapper;
+import com.everis.gameStore.mapper.UpdateMapper;
 import com.everis.gameStore.repository.ClientsRepository;
 import com.everis.gameStore.repository.RolesRespository;
 import com.everis.gameStore.service.ClientService;
@@ -43,11 +43,12 @@ public class ClientServiceImpl implements ClientService {
      * @see com.everis.gameStore.service.ClientService#createClient(com.everis.gameStore. domain.DTO.ClientsRequestDTO)
      */
     @Override
-    public void createClient(ClientsRequestVO clientsRequestVO) {
+    public ClientsResponseVO createClient(ClientsRequestVO clientsRequestVO) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
         clientsRequestVO.setPassword(bCryptPasswordEncoder.encode(clientsRequestVO.getPassword()));
         Clients clients = clientMapper.mapperClientsToClientsRequestVO(clientsRequestVO);
-        clientsRepository.save(clients);
+        clients = clientsRepository.save(clients);
+        return clientMapper.ClientsToClientsResponseVO(clients);
     }
 
     /*
@@ -73,11 +74,9 @@ public class ClientServiceImpl implements ClientService {
      * @see com.everis.gameStore.service.ClientService#getClientById(java.lang.Long)
      */
     @Override
-    public ClientsResponseVO getClientById(Long idClient) {
-        ClientsResponseVO clientsResponseVO = new ClientsResponseVO();
-        Clients clients = clientsRepository.findByIdClient(idClient);
-        clientsResponseVO = clientMapper.ClientsToClientsResponseVO(clients);
-        return clientsResponseVO;
+    public ClientsResponseVO getClientById(Long idClient) throws ClientNotFoundException {
+        Clients clients = clientsRepository.findById(idClient).orElseThrow(() -> new ClientNotFoundException(idClient));
+        return clientMapper.ClientsToClientsResponseVO(clients);
     }
 
     /*
@@ -86,18 +85,13 @@ public class ClientServiceImpl implements ClientService {
      * @see com.everis.gameStore.service.ClientService#updateClient(com.everis.gameStore.domain.VO.ClientsRequestVO)
      */
     @Override
-    public void updateClient(ClientsRequestVO clientsRequestVO, Long id) {
-        Clients clients = clientsRepository.findByIdClient(id);
-        
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
-        clientsRequestVO.setPassword(bCryptPasswordEncoder.encode(clientsRequestVO.getPassword()));
-
-        Date date = new Date();
-        Timestamp ts = new Timestamp(date.getTime());
-        clientsRequestVO.setDateAcquiredGame(ts);
-
-        clients = clientMapper.mapperClientsToClientsRequestVO(clientsRequestVO);
-        clientsRepository.save(clients);
+    public ClientsResponseVO updateClient(ClientsRequestVO clientsRequestVO, Long id) throws ClientNotFoundException {
+        Clients clients = clientsRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
+        clients = UpdateMapper.mapperClientsToClientsRequestVO(clientsRequestVO, clients);
+        if (null != clients) {
+            clients = clientsRepository.save(clients);
+        }
+        return clientMapper.ClientsToClientsResponseVO(clients);
     }
 
     /*

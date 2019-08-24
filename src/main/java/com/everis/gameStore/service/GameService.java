@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.everis.gameStore.domain.VO.GamesRequestVO;
 import com.everis.gameStore.domain.VO.GamesResponseVO;
+import com.everis.gameStore.domain.exceptions.GameNotFoundException;
 
 /**
  * The Interface GameService.
@@ -15,7 +16,7 @@ public interface GameService {
      *
      * @param gamesRequestVO the games request VO
      */
-    void createGame(GamesRequestVO gamesRequestVO);
+    GamesResponseVO createGame(GamesRequestVO gamesRequestVO);
 
     /**
      * Gets the all games.
@@ -29,16 +30,18 @@ public interface GameService {
      *
      * @param idGames the id games
      * @return the game by id
+     * @throws GameNotFoundException 
      */
-    GamesResponseVO getGameById(Long idGames);
+    GamesResponseVO getGameById(Long idGames) throws GameNotFoundException;
 
     /**
      * Update game.
      *
      * @param gamesRequestVO the games request VO
      * @param id the id
+     * @throws GameNotFoundException 
      */
-    void updateGame(GamesRequestVO gamesRequestVO, Long id);
+    GamesResponseVO updateGame(GamesRequestVO gamesRequestVO, Long id) throws GameNotFoundException;
 
     /**
      * Delete game.

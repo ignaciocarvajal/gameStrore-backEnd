@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ import io.swagger.annotations.ApiResponses;
  */
 @CrossOrigin(methods = { RequestMethod.GET })
 @RestController
+@RequestMapping("/roles")
 public class RolesController {
 
     /** The Constant LOGGER. */
@@ -33,20 +35,20 @@ public class RolesController {
     /** The client facade. */
     @Autowired
     private ClientFacade clientFacade;
-    
+
     /**
      * Gets the all roles.
      *
      * @return the all roles
      * @throws ServiceException the service exception
      */
-    @ApiOperation(value = "Get all clients")
+    @ApiOperation(value = "Get all roles")
     @ApiResponses({ @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 401, message = "Unauthorized", response = Throwable.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceException.class) })
-    @RequestMapping(value = "/getAllRoles", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/")
     public ResponseEntity<List<RolesResponseDTO>> getAllRoles() throws ServiceException {
         try {
             return new ResponseEntity<List<RolesResponseDTO>>(clientFacade.getAllRoles(), HttpStatus.OK);

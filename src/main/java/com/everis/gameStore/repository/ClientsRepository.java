@@ -1,6 +1,6 @@
 package com.everis.gameStore.repository;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.everis.gameStore.domain.model.Clients;
@@ -9,7 +9,7 @@ import com.everis.gameStore.domain.model.Clients;
  * The Interface ClientsRepository.
  */
 @Repository
-public interface ClientsRepository extends PagingAndSortingRepository<Clients, Long> {
+public interface ClientsRepository extends CrudRepository<Clients, Long> {
 
     /**
      * Find by email.
@@ -18,12 +18,4 @@ public interface ClientsRepository extends PagingAndSortingRepository<Clients, L
      * @return the clients
      */
     Clients findByEmail(String email);
-
-    /**
-     * Find by id client.
-     *
-     * @param idClient the id client
-     * @return the clients
-     */
-    Clients findByIdClient(Long idClient);
 }
