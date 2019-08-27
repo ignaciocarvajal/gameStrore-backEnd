@@ -39,7 +39,7 @@ public class GameServiceImpl implements GameService {
     public GamesResponseVO createGame(GamesRequestVO gamesRequestVO) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
         Games games = gameMapper.GamesRequestVoToGames(gamesRequestVO);
-        games.setGameName(bCryptPasswordEncoder.encode(gamesRequestVO.getGameName()));
+        games.setActivationCode(bCryptPasswordEncoder.encode(gamesRequestVO.getGameName()));
         games = gamesRepository.save(games);
         return gameMapper.GamesToGamesResponseVO(games);
     }
@@ -84,7 +84,7 @@ public class GameServiceImpl implements GameService {
     public GamesResponseVO updateGame(GamesRequestVO gamesRequestVO, Long id) throws GameNotFoundException {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
         Games games = gamesRepository.findById(id).orElseThrow(() -> new GameNotFoundException(id));
-        games.setGameName(bCryptPasswordEncoder.encode(gamesRequestVO.getGameName()));
+        gamesRequestVO.setActivationCode(bCryptPasswordEncoder.encode(gamesRequestVO.getGameName()));
         games = UpdateMapper.mapperGamesToGamesRequestVO(gamesRequestVO, games);
         if (null != games) {
             games = gamesRepository.save(games);

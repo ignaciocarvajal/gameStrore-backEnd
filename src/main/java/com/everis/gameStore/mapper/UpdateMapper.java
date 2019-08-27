@@ -39,16 +39,21 @@ public class UpdateMapper {
             return null;
         }
 
-        clients.setNickname(null != clientsRequestVO.getNickname()? clientsRequestVO.getNickname() : clients.getNickname());
-        clients.setEmail(null != clientsRequestVO.getEmail()? clientsRequestVO.getEmail() : clients.getEmail());
-        clients.setPassword(null != clientsRequestVO.getPassword() ? bCryptPasswordEncoder.encode(clientsRequestVO.getPassword()) : clients.getPassword());
-        
-        if(null != clientsRequestVO.getListAcquiredGames() && clientsRequestVO.getListAcquiredGames().size() > 0) {
+        clients.setNickname(
+                null != clientsRequestVO.getNickname() ? clientsRequestVO.getNickname() : clients.getNickname());
+        clients.setEmail(null != clientsRequestVO.getEmail() ? clientsRequestVO.getEmail() : clients.getEmail());
+        clients.setPassword(
+                null != clientsRequestVO.getPassword() ? bCryptPasswordEncoder.encode(clientsRequestVO.getPassword())
+                        : clients.getPassword());
+
+        if (null != clientsRequestVO.getListAcquiredGames() && clientsRequestVO.getListAcquiredGames().size() > 0) {
             clients.getListAcquiredGames().add(clientsRequestVO.getListAcquiredGames().get(0));
         }
-        
-        clients.setDateAcquiredGame(null != clientsRequestVO.getDateAcquiredGame()? clientsRequestVO.getDateAcquiredGame() : new Timestamp(new Date().getTime()));
-        
+
+        clients.setDateAcquiredGame(
+                null != clientsRequestVO.getDateAcquiredGame() ? clientsRequestVO.getDateAcquiredGame()
+                        : new Timestamp(new Date().getTime()));
+
         Set<Roles> set = clientsRequestVO.getRoles();
         if (set != null) {
             clients.setRoles(new HashSet<Roles>(set));
@@ -56,7 +61,7 @@ public class UpdateMapper {
 
         return clients;
     }
-    
+
     /**
      * Mapper games to games request VO.
      *
@@ -65,22 +70,22 @@ public class UpdateMapper {
      * @return the games
      */
     public static Games mapperGamesToGamesRequestVO(GamesRequestVO gamesRequestVO, Games games) {
-        if ( gamesRequestVO == null ) {
+        if (gamesRequestVO == null) {
             return null;
         }
-        
-        if ( games == null ) {
+
+        if (games == null) {
             return null;
         }
-        
-        games.setGameName( gamesRequestVO.getGameName() );
-        List<Images> list = gamesRequestVO.getImage();
-        if ( list != null ) {
-            games.setImage( new ArrayList<Images>( list ) );
+
+        games.setGameName(null != gamesRequestVO ? gamesRequestVO.getGameName() : games.getGameName());
+        List<Images> list = (null != gamesRequestVO.getImage() ? gamesRequestVO.getImage() : games.getImage());
+        if (list != null) {
+            games.setImage(new ArrayList<Images>(list));
         }
-        games.setActivationCode( gamesRequestVO.getActivationCode() );
-        games.setValue( gamesRequestVO.getValue() );
-        games.setStock( gamesRequestVO.getStock() );
+        games.setActivationCode(gamesRequestVO.getActivationCode());
+        games.setValue(null != gamesRequestVO.getValue() ? gamesRequestVO.getValue() : games.getValue());
+        games.setStock(null != gamesRequestVO.getStock() ? gamesRequestVO.getStock() : games.getStock());
 
         return games;
     }
